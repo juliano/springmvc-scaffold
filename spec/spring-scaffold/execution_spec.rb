@@ -8,43 +8,34 @@ describe SpringMvcScaffold::Execution do
 
   context "discover runner for action" do
     it "should be commands help when no action" do
-      @execution.runner_for(nil).should == SpringMvcScaffold::Runner::CommandsHelp
+      runner = @execution.runner_for(nil)
+      expect(runner).to be SpringMvcScaffold::Runner::CommandsHelp
     end
 
     it "should be app generator when -h action" do
-      @execution.runner_for("-h").should == SpringMvcScaffold::Runner::Generator
+      runner = @execution.runner_for("-h")
+      expect(runner).to be SpringMvcScaffold::Runner::Generator
     end
 
     it "should be app generator when --help action" do
-      @execution.runner_for("--help").should == SpringMvcScaffold::Runner::Generator
+      runner = @execution.runner_for("--help")
+      expect(runner).to be SpringMvcScaffold::Runner::Generator
     end
 
     it "should be app generator when new action" do
-      @execution.runner_for("new").should == SpringMvcScaffold::Runner::Generator
+      runner = @execution.runner_for("new")
+      expect(runner).to be SpringMvcScaffold::Runner::Generator
     end
 
     it "should be app generator when scaffold action" do
-      @execution.runner_for("scaffold").should == SpringMvcScaffold::Runner::Scaffold
-    end
-
-    it "should be plugin generator when plugin action" do
-      @execution.runner_for("plugin").should == SpringMvcScaffold::Runner::Plugin
-    end
-
-    it "should be start application when start action" do
-      @execution.runner_for("start").should == SpringMvcScaffold::Runner::Start
+      runner = @execution.runner_for("scaffold")
+      expect(runner).to be SpringMvcScaffold::Runner::Scaffold
     end
 
     it "should be commands help when scaffold when unknown action" do
-      @execution.runner_for("xpto").should == SpringMvcScaffold::Runner::CommandsHelp
+      runner = @execution.runner_for("xpto")
+      expect(runner).to be SpringMvcScaffold::Runner::CommandsHelp
     end
   end
 
-  it "should discover runner and run" do
-    runner = mock(SpringMvcScaffold::Runner::Generator)
-    runner.stub!(:new).and_return runner
-    runner.should_receive(:run).with(['app'])
-    @execution.stub!(:runner_for).with('new').and_return(runner)
-    @execution.run(['new', 'app'])
-  end
 end

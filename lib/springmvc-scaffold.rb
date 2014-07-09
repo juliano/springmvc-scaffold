@@ -1,5 +1,5 @@
 module SpringMvcScaffold
 end
 
-require 'springmvc-scaffold/execution'
 require 'springmvc-scaffold/runner'
+require 'springmvc-scaffold/execution'

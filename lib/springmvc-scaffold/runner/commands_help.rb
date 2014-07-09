@@ -1,7 +1,7 @@
 module SpringMvcScaffold
   module Runner
 
-    class Scaffold
+    class CommandsHelp
     end
   end
 end

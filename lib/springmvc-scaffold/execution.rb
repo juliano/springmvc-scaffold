@@ -7,7 +7,7 @@ module SpringMvcScaffold
     end
 
     def runner_for(action)
-      SpringMvcScaffold::COMMANDS.fetch(action)
+      SpringMvcScaffold::COMMANDS.fetch(action, Runner::CommandsHelp)
     end
   end
 
