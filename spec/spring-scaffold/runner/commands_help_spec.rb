@@ -7,7 +7,7 @@ describe SpringMvcScaffold::Runner::CommandsHelp do
     expect(Kernel).to receive(:puts).with("Usage:")
     expect(Kernel).to receive(:puts).with("  springmvc runner")
 
-    SpringMvcScaffold::Runner::CommandsHelp.new.run('')
+    described_class.new.run('')
   end
 
 end
