@@ -20,5 +20,11 @@ describe AppGenerator do
       expect(Kernel).to receive(:exit)
       described_class.new(@project_path, [])
     end
+
+    it "should create pom.xml" do
+      source = File.join(File.dirname(__FILE__), "templates", "pom.xml")
+      destination = "#{@project_path}/pom.xml"
+      exists_and_identical?(source, destination)
+    end
   end
 end
