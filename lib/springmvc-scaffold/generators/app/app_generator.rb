@@ -21,6 +21,10 @@ class AppGenerator < SpringMvcScaffold::Base
     template("pom.erb", "pom.xml")
   end
 
+  def create_main_java
+    empty_directory "src/main/java"
+  end
+
   private
   def validate
     if File.directory?(project_path)
