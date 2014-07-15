@@ -44,6 +44,10 @@ describe AppGenerator do
         expect(File.exist?("#{app}/controllers")).to be true
       end
 
+      it "should create models folder" do
+        expect(File.exist?("#{app}/models")).to be true
+      end
+
     end
   end
 end

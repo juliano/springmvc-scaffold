@@ -6,6 +6,8 @@ class AppGenerator < SpringMvcScaffold::Base
 
   class_option :controllers_package, aliases: "-c", default: "controllers", desc: "Define controllers package"
 
+  class_option :models_package, aliases: "-m", default: "models", desc: "Define models package"
+
   def self.source_root
     File.join(File.dirname(__FILE__), "templates")
   end
@@ -32,6 +34,10 @@ class AppGenerator < SpringMvcScaffold::Base
 
   def create_controllers_directory
     empty_directory File.join(@src, options[:controllers_package])
+  end
+
+  def create_models_directory
+    empty_directory File.join(@src, options[:models_package])
   end
 
   private
