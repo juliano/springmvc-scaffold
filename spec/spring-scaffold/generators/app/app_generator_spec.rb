@@ -30,10 +30,20 @@ describe AppGenerator do
 
     context "creating main java" do
       let(:main_java) { "#{project_path}/#{Configuration::MAIN_SRC}" }
+      let(:app) { "#{main_java}/app" }
 
       it "should create source folder" do
         expect(File.exist?(main_java)).to be true
       end
+
+      it "should create app folder" do
+        expect(File.exist?(app)).to be true
+      end
+
+      it "should create controllers folder" do
+        expect(File.exist?("#{app}/controllers")).to be true
+      end
+
     end
   end
 end
