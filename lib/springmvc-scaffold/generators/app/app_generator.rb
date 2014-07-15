@@ -22,7 +22,7 @@ class AppGenerator < SpringMvcScaffold::Base
   end
 
   def create_main_java
-    empty_directory "src/main/java"
+    empty_directory Configuration::MAIN_SRC
   end
 
   private

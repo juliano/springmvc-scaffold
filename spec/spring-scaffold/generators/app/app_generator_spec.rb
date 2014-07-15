@@ -29,7 +29,7 @@ describe AppGenerator do
     end
 
     context "creating main java" do
-      let(:main_java) { "#{project_path}/src/main/java" }
+      let(:main_java) { "#{project_path}/#{Configuration::MAIN_SRC}" }
 
       it "should create source folder" do
         expect(File.exist?(main_java)).to be true
