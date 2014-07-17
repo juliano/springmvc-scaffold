@@ -40,6 +40,10 @@ class AppGenerator < SpringMvcScaffold::Base
     empty_directory File.join(@src, options[:models_package])
   end
 
+  def create_webapp
+    directory("webapp", Configuration::WEB_APP)
+  end
+
   private
   def validate
     if File.directory?(project_path)

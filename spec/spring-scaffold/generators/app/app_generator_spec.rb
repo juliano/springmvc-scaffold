@@ -47,7 +47,15 @@ describe AppGenerator do
       it "should create models folder" do
         expect(File.exist?("#{app}/models")).to be true
       end
+    end
 
+    context "creating main webapp" do
+      let(:webapp) { "#{project_path}/#{Configuration::WEB_APP}" }
+      let(:web_inf) { "#{project_path}/#{Configuration::WEB_INF}" }
+
+      it "should create webapp folder" do
+        expect(File.exist?(webapp)).to be true
+      end
     end
   end
 end
