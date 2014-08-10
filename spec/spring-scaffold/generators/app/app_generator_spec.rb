@@ -56,6 +56,10 @@ describe AppGenerator do
       it "should create webapp folder" do
         expect(File.exist?(webapp)).to be true
       end
+
+      it "should create WEB-INF folder" do
+        expect(File.exist?(web_inf)).to be true
+      end
     end
   end
 end
