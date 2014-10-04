@@ -65,6 +65,12 @@ describe AppGenerator do
         appjs = "#{webapp}/javascripts/application.js"
         expect(File.exists?(appjs)).to be true
       end
+
+      it "should create application.css" do
+        source = "#{AppGenerator.source_root}/webapp/stylesheets/application.css"
+        destination = "#{webapp}/stylesheets/application.css"
+        exists_and_identical?(source, destination)
+      end
     end
   end
 end
