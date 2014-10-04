@@ -60,6 +60,11 @@ describe AppGenerator do
       it "should create WEB-INF folder" do
         expect(File.exist?(web_inf)).to be true
       end
+
+      it "should create application.js" do
+        appjs = "#{webapp}/javascripts/application.js"
+        expect(File.exists?(appjs)).to be true
+      end
     end
   end
 end
