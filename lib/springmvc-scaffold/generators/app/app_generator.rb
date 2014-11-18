@@ -49,6 +49,10 @@ class AppGenerator < SpringMvcScaffold::Base
     create_file File.join(javascripts, "application.js")
   end
 
+  def create_main_resources
+    directory("resources", Configuration::MAIN_RESOURCES)
+  end
+
   private
   def validate
     if File.directory?(project_path)

@@ -63,7 +63,7 @@ describe AppGenerator do
 
       it "should create application.js" do
         appjs = "#{webapp}/javascripts/application.js"
-        expect(File.exists?(appjs)).to be true
+        expect(File.exist?(appjs)).to be true
       end
 
       it "should create application.css" do
@@ -71,6 +71,16 @@ describe AppGenerator do
         destination = "#{webapp}/stylesheets/application.css"
         exists_and_identical?(source, destination)
       end
+    end
+
+    context "creating main resources" do
+      let(:main_resources) { "#{project_path}/#{Configuration::MAIN_RESOURCES}" }
+      let(:meta_inf) { "#{main_resources}/META-INF" }
+
+      it "should create resource folder" do
+        expect(File.exist?(main_resources)).to be true
+      end
+
     end
   end
 end

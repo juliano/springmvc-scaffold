@@ -10,6 +10,10 @@ describe Configuration do
     expect(Configuration::WEB_APP).to eq "src/main/webapp"
   end
 
+  it "should configure main resources" do
+    expect(Configuration::MAIN_RESOURCES).to eq "src/main/resources"
+  end
+
   it "should configure web-inf" do
     expect(Configuration::WEB_INF).to eq "#{Configuration::WEB_APP}/WEB-INF"
   end
