@@ -81,8 +81,14 @@ describe AppGenerator do
       let(:main_resources) { "#{project_path}/#{Configuration::MAIN_RESOURCES}" }
       let(:meta_inf) { "#{main_resources}/META-INF" }
 
-      it "should create resource folder" do
+      it "should create resources folder" do
         expect(File.exist?(main_resources)).to be true
+      end
+
+      it "should create log4j" do
+        source = "#{AppGenerator.source_root}/resources/log4j.properties"
+        destination = "#{main_resources}/log4j.properties"
+        exists_and_identical?(source, destination)
       end
     end
 
