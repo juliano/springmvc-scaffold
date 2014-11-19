@@ -94,6 +94,10 @@ describe AppGenerator do
       it "should create test resources folder" do
         expect(File.exist?(test_resources)).to be true
       end
+
+      it "should create controllers folder" do
+        expect(File.exist?("#{app}/controllers")).to be true
+      end
     end
   end
 end

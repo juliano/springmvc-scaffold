@@ -55,9 +55,10 @@ class AppGenerator < SpringMvcScaffold::Base
 
   def create_test
     empty_directory Configuration::TEST_SRC
-  end
+    test_src = File.join(Configuration::TEST_SRC, options[:package].gsub(".", File::Separator))
 
-  def create_test_resources
+    empty_directory(File.join(test_src, options[:controllers_package]))
+
     empty_directory Configuration::TEST_RESOURCES
   end
 
