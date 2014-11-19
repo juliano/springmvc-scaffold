@@ -5,3 +5,4 @@ module SpringMvcScaffold
 end
 
 require File.dirname(__FILE__) + '/app/app_generator'
+require File.dirname(__FILE__) + '/app/dependency'
