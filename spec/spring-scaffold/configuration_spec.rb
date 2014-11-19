@@ -18,4 +18,12 @@ describe Configuration do
     expect(Configuration::WEB_INF).to eq "#{Configuration::WEB_APP}/WEB-INF"
   end
 
+  it "should configure test source" do
+    expect(Configuration::TEST_SRC).to eq "src/test/java"
+  end
+
+  it "should configure test resources" do
+    expect(Configuration::TEST_RESOURCES).to eq "src/test/resources"
+  end
+
 end

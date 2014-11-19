@@ -80,7 +80,16 @@ describe AppGenerator do
       it "should create resource folder" do
         expect(File.exist?(main_resources)).to be true
       end
+    end
 
+    context "creating test" do
+      let(:test_java) { "#{project_path}/#{Configuration::TEST_SRC}" }
+      let(:test_resources) { "#{project_path}/#{Configuration::TEST_RESOURCES}" }
+      let(:app) { "#{test_java}/app" }
+
+      it "should create test source folder" do
+        expect(File.exist?(test_java)).to be true
+      end
     end
   end
 end
