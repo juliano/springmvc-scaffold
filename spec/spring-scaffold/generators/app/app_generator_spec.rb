@@ -90,6 +90,12 @@ describe AppGenerator do
         destination = "#{main_resources}/log4j.properties"
         exists_and_identical?(source, destination)
       end
+
+      it "should create messages.properties" do
+        source = "#{AppGenerator.source_root}/resources/messages.properties"
+        destination = "#{main_resources}/messages.properties"
+        exists_and_identical?(source, destination)
+      end
     end
 
     context "creating test" do
