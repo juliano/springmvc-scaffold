@@ -1,6 +1,6 @@
 class AppGenerator < SpringMvcScaffold::Base
 
-  BUILD_TOOLS = %w( mvn, gradle )
+  BUILD_TOOLS = %w( mvn gradle )
 
   argument :project_path
 

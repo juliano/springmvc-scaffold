@@ -150,4 +150,14 @@ describe AppGenerator do
       expect(File.exist?("#{project_path}/pom.xml")).to be false
     end
   end
+
+  context "valid build tools" do
+    it "maven should be valid" do
+      expect(AppGenerator::BUILD_TOOLS.include?("mvn")).to be true
+    end
+
+    it "gradle should be valid" do
+      expect(AppGenerator::BUILD_TOOLS.include?("gradle")).to be true
+    end
+  end
 end
