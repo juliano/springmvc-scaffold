@@ -58,6 +58,7 @@ class AppGenerator < SpringMvcScaffold::Base
     test_src = File.join(Configuration::TEST_SRC, options[:package].gsub(".", File::Separator))
 
     empty_directory(File.join(test_src, options[:controllers_package]))
+    empty_directory(File.join(test_src, options[:models_package]))
 
     empty_directory Configuration::TEST_RESOURCES
   end
