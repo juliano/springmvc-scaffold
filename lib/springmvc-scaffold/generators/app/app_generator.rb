@@ -80,6 +80,11 @@ class AppGenerator < SpringMvcScaffold::Base
 
   private
   def validate
+    unless BUILD_TOOLS.include? options[:build_tool]
+      puts "Build tool #{options[:build_tool]} is not supported. The supported build tools are: #{BUILD_TOOLS.join(', ')}"
+      Kernel::exit
+    end
+
     if File.directory?(project_path)
       puts "The project #{project_path} already exist"
       Kernel::exit

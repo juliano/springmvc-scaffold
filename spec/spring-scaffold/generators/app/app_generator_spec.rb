@@ -160,4 +160,13 @@ describe AppGenerator do
       expect(AppGenerator::BUILD_TOOLS.include?("gradle")).to be true
     end
   end
+
+  context "validate options" do
+    let(:project_path) { "springmvc-scaffold" }
+
+    it "should be invalid when build tool is not supported" do
+      expect(Kernel).to receive(:exit)
+      AppGenerator.new(project_path, ["-b=maven"])
+    end
+  end
 end
