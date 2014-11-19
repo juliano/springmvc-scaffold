@@ -1,6 +1,6 @@
 class Dependencies
 
-  def compile_scope
+  def self.compile_scope
     hibernate_version = "4.0.1.Final"
     [Dependency.new("org.springframework", "spring-web", "4.0.0"),
      Dependency.new("javax.servlet", "jstl", "1.2"),
@@ -11,13 +11,13 @@ class Dependencies
      Dependency.new("joda-time", "joda-time", "2.0")]
   end
 
-  def test_scope
+  def self.test_scope
     [Dependency.new("junit", "junit", "4.10"),
      Dependency.new("org.mockito", "mockito-all", "1.9.0"),
      Dependency.new("org.hamcrest", "hamcrest-all", "1.1")]
   end
 
-  def provided_scope
+  def self.provided_scope
     [Dependency.new("javax.servlet", "servlet-api", "2.5"), Dependency.new("javax.servlet.jsp", "jsp-api", "2.1")]
   end
 end
