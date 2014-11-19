@@ -29,6 +29,10 @@ class AppGenerator < SpringMvcScaffold::Base
     template("pom.erb", "pom.xml")
   end
 
+  def configure_gradle
+    template("build.gradle.erb", "build.gradle")
+  end
+
   def create_main_java
     empty_directory Configuration::MAIN_SRC
     @src = File.join(Configuration::MAIN_SRC, options[:package].gsub(".", File::Separator))

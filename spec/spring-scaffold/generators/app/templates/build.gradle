@@ -1,0 +1,42 @@
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+version = '1.0'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDir 'src/test/resources'
+        }
+    }
+}
+
+sourceSets.main.classesDir = new File('src/main/webapp/WEB-INF/classes')
+
+jettyRun.scanIntervalSeconds=3
+jettyRun.contextPath = '/'
+[jettyRunWar,jettyStop]*.stopPort = 8081
+[jettyRunWar,jettyStop]*.stopKey = 'stopKey'
+
+dependencies {
+
+}

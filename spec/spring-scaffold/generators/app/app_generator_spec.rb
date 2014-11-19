@@ -124,4 +124,22 @@ describe AppGenerator do
       end
     end
   end
+
+  context "creating gradle application" do
+    let(:project_path) { "springmvc-scaffold" }
+
+    before do
+      described_class.new(project_path, ["-b=gradle"]).invoke_all
+    end
+
+    after do
+      FileUtils.remove_dir(project_path)
+    end
+
+    it "should create build.gradle" do
+      source = File.join(File.dirname(__FILE__), "templates", "build.gradle")
+      destination = "#{project_path}/build.gradle"
+      exists_and_identical?(source, destination)
+    end
+  end
 end
