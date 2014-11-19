@@ -57,6 +57,10 @@ class AppGenerator < SpringMvcScaffold::Base
     empty_directory Configuration::TEST_SRC
   end
 
+  def create_test_resources
+    empty_directory Configuration::TEST_RESOURCES
+  end
+
   private
   def validate
     if File.directory?(project_path)
