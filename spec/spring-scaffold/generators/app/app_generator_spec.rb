@@ -129,6 +129,28 @@ describe AppGenerator do
     end
   end
 
+  context "build app with complex package" do
+    let(:project_path) { "src/springmvc-scaffold" }
+    let(:main_java) { "#{project_path}/#{Configuration::MAIN_SRC}/br/com/juliano" }
+    let(:test_java) { "#{project_path}/#{Configuration::TEST_SRC}/br/com/juliano" }
+
+    before do
+      described_class.new(project_path, ["-p=br.com.juliano"]).invoke_all
+    end
+
+    after do
+      FileUtils.remove_dir("src")
+    end
+
+    it "should create main path" do
+      expect(File.exist?(main_java)).to be true
+    end
+
+    it "should create test path" do
+      expect(File.exist?(test_java)).to be true
+    end
+  end
+
   context "creating gradle application" do
     let(:project_path) { "springmvc-scaffold" }
 
