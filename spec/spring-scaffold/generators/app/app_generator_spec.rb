@@ -47,6 +47,10 @@ describe AppGenerator do
       it "should create models folder" do
         expect(File.exist?("#{app}/models")).to be true
       end
+
+      it "should create repositories folder" do
+        expect(File.exist?("#{app}/repositories")).to be true
+      end
     end
 
     context "creating main webapp" do
@@ -101,6 +105,10 @@ describe AppGenerator do
 
       it "should create models folder" do
         expect(File.exist?("#{app}/models")).to be true
+      end
+
+      it "should create repositories folder" do
+        expect(File.exist?("#{app}/repositories")).to be true
       end
     end
   end

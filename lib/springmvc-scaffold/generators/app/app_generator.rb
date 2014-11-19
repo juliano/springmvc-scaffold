@@ -8,6 +8,8 @@ class AppGenerator < SpringMvcScaffold::Base
 
   class_option :models_package, aliases: "-m", default: "models", desc: "Define models package"
 
+  class_option :repositories_package, aliases: "-r", default: "repositories", desc: "Define repositories package"
+
   def self.source_root
     File.join(File.dirname(__FILE__), "templates")
   end
@@ -40,6 +42,10 @@ class AppGenerator < SpringMvcScaffold::Base
     empty_directory File.join(@src, options[:models_package])
   end
 
+  def create_repositories_directory
+    empty_directory File.join(@src, options[:repositories_package])
+  end
+
   def create_webapp
     directory("webapp", Configuration::WEB_APP)
   end
@@ -57,8 +63,9 @@ class AppGenerator < SpringMvcScaffold::Base
     empty_directory Configuration::TEST_SRC
     test_src = File.join(Configuration::TEST_SRC, options[:package].gsub(".", File::Separator))
 
-    empty_directory(File.join(test_src, options[:controllers_package]))
-    empty_directory(File.join(test_src, options[:models_package]))
+    empty_directory File.join(test_src, options[:controllers_package])
+    empty_directory File.join(test_src, options[:models_package])
+    empty_directory File.join(test_src, options[:repositories_package])
 
     empty_directory Configuration::TEST_RESOURCES
   end
