@@ -1,5 +1,7 @@
 class AppGenerator < SpringMvcScaffold::Base
 
+  BUILD_TOOLS = %w( mvn, gradle )
+
   argument :project_path
 
   class_option :package, default: "app", aliases: "-p", desc: "Define base package"
@@ -9,6 +11,8 @@ class AppGenerator < SpringMvcScaffold::Base
   class_option :models_package, aliases: "-m", default: "models", desc: "Define models package"
 
   class_option :repositories_package, aliases: "-r", default: "repositories", desc: "Define repositories package"
+
+  class_option :build_tool, aliases: "-b", default: "mvn", desc: "Build tools (options: #{BUILD_TOOLS.join(', ')})"
 
   def self.source_root
     File.join(File.dirname(__FILE__), "templates")
@@ -26,11 +30,11 @@ class AppGenerator < SpringMvcScaffold::Base
   end
 
   def configure_maven
-    template("pom.erb", "pom.xml")
+    template("pom.erb", "pom.xml") if options[:build_tool] == "mvn"
   end
 
   def configure_gradle
-    template("build.gradle.erb", "build.gradle")
+    template("build.gradle.erb", "build.gradle") if options[:build_tool] == "gradle"
   end
 
   def create_main_java

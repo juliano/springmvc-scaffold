@@ -28,6 +28,10 @@ describe AppGenerator do
       exists_and_identical?(source, destination)
     end
 
+    it "cannot create build.gradle" do
+      expect(File.exist?("#{project_path}/build.gradle")).to be false
+    end
+
     context "creating main java" do
       let(:main_java) { "#{project_path}/#{Configuration::MAIN_SRC}" }
       let(:app) { "#{main_java}/app" }
@@ -140,6 +144,10 @@ describe AppGenerator do
       source = File.join(File.dirname(__FILE__), "templates", "build.gradle")
       destination = "#{project_path}/build.gradle"
       exists_and_identical?(source, destination)
+    end
+
+    it "cannot create pom.xml" do
+      expect(File.exist?("#{project_path}/pom.xml")).to be false
     end
   end
 end
