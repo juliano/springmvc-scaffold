@@ -21,6 +21,7 @@ class Dependencies
   end
 
   def self.provided_scope
-    [Dependency.new("javax.servlet", "servlet-api", "2.5"), Dependency.new("javax.servlet.jsp", "jsp-api", "2.1")]
+    [Dependency.new("javax.servlet", "servlet-api", "2.5"),
+     Dependency.new("javax.servlet.jsp", "jsp-api", "2.2")]
   end
 end
