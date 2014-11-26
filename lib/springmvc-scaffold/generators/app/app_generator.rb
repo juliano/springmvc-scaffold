@@ -55,6 +55,7 @@ class AppGenerator < SpringMvcScaffold::Base
   end
 
   def create_webapp
+    @base_package = options[:package]
     directory("webapp", Configuration::WEB_APP)
   end
 
