@@ -2,9 +2,10 @@ class Dependencies
 
   def self.compile_scope
     hibernate_version = "4.0.1.Final"
-    [Dependency.new("org.springframework", "spring-core", "4.1.2.RELEASE"),
-     Dependency.new("org.springframework", "spring-web", "4.1.2.RELEASE"),
-     Dependency.new("org.springframework", "spring-webmvc", "4.1.2.RELEASE"),
+    spring_version = "4.1.2.RELEASE"
+    [Dependency.new("org.springframework", "spring-core", spring_version),
+     Dependency.new("org.springframework", "spring-web", spring_version),
+     Dependency.new("org.springframework", "spring-webmvc", spring_version),
      Dependency.new("javax.servlet", "jstl", "1.2"),
      Dependency.new("org.hsqldb", "hsqldb", "2.2.8"),
      Dependency.new("org.hibernate", "hibernate-entitymanager", hibernate_version),
