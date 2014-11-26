@@ -38,7 +38,9 @@ jettyRun.contextPath = '/'
 [jettyRunWar,jettyStop]*.stopKey = 'stopKey'
 
 dependencies {
-    compile group: 'org.springframework', name: 'spring-web', version: '4.0.0'
+    compile group: 'org.springframework', name: 'spring-core', version: '4.1.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version: '4.1.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '4.1.2.RELEASE'
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
     compile group: 'org.hsqldb', name: 'hsqldb', version: '2.2.8'
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.0.1.Final'
