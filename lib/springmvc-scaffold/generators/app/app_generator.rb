@@ -15,6 +15,8 @@ class AppGenerator < SpringMvcScaffold::Base
 
   class_option :build_tool, aliases: "-b", default: "mvn", desc: "Build tools (options: #{BUILD_TOOLS.join(', ')})"
 
+  class_option :orm, aliases: "-o", default: "jpa", desc: "Object-relational mapping (options: #{ORMS.join(', ')})"
+
   def self.source_root
     File.join(File.dirname(__FILE__), "templates")
   end
@@ -88,6 +90,10 @@ class AppGenerator < SpringMvcScaffold::Base
   def validate
     unless BUILD_TOOLS.include? options[:build_tool]
       puts "Build tool #{options[:build_tool]} is not supported. The supported build tools are: #{BUILD_TOOLS.join(', ')}"
+      Kernel::exit
+    end
+    unless ORMS.include? options[:orm]
+      puts "ORM #{options[:orm]} is not supported. The supported object-relational mapping are: #{ORMS.join(", ")}"
       Kernel::exit
     end
 

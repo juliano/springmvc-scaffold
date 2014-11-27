@@ -219,7 +219,7 @@ describe AppGenerator do
 
     it "should be invalid when orm is not supported" do
       expect(Kernel).to receive(:exit)
-      AppGenerator.new(project_path, ["-b=toplink"])
+      AppGenerator.new(project_path, ["-o=toplink"])
     end
   end
 end
