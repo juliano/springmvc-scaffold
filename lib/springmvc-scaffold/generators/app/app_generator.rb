@@ -55,6 +55,14 @@ class AppGenerator < SpringMvcScaffold::Base
     empty_directory File.join(@src, options[:repositories_package])
   end
 
+  def create_main_resources
+    directory("resources", Configuration::MAIN_RESOURCES)
+  end
+
+  def configure_orm
+    directory("orm/META-INF", Configuration::META_INF)
+  end
+
   def create_webapp
     @base_package = options[:package]
     directory("webapp", Configuration::WEB_APP)
@@ -63,10 +71,6 @@ class AppGenerator < SpringMvcScaffold::Base
   def create_javascripts
     javascripts = File.join(Configuration::WEB_APP, "javascripts")
     create_file File.join(javascripts, "application.js")
-  end
-
-  def create_main_resources
-    directory("resources", Configuration::MAIN_RESOURCES)
   end
 
   def create_test

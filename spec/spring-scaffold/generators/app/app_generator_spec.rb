@@ -89,6 +89,16 @@ describe AppGenerator do
         expect(File.exist?(main_resources)).to be true
       end
 
+      it "should create META-INF" do
+        expect(File.exist?(meta_inf)).to be true
+      end
+
+      it "should create persistence.xml" do
+        source = "#{AppGenerator.source_root}/orm/META-INF/persistence.xml"
+        destination = "#{meta_inf}/persistence.xml"
+        exists_and_identical?(source, destination)
+      end
+
       it "should create log4j" do
         source = "#{AppGenerator.source_root}/resources/log4j.properties"
         destination = "#{main_resources}/log4j.properties"
