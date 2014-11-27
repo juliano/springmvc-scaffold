@@ -1,6 +1,7 @@
 class AppGenerator < SpringMvcScaffold::Base
 
   BUILD_TOOLS = %w( mvn gradle )
+  ORMS = %w( jpa hibernate)
 
   argument :project_path
 

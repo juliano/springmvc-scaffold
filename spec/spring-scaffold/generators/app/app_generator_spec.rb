@@ -183,12 +183,27 @@ describe AppGenerator do
     end
   end
 
+  context "valid orm" do
+    it "jpa should be valid" do
+      expect(AppGenerator::ORMS.include?("jpa")).to be true
+    end
+
+    it "hibernate should be valid" do
+      expect(AppGenerator::ORMS.include?("hibernate")).to be true
+    end
+  end
+
   context "validate options" do
     let(:project_path) { "springmvc-scaffold" }
 
     it "should be invalid when build tool is not supported" do
       expect(Kernel).to receive(:exit)
       AppGenerator.new(project_path, ["-b=maven"])
+    end
+
+    it "should be invalid when orm is not supported" do
+      expect(Kernel).to receive(:exit)
+      AppGenerator.new(project_path, ["-b=toplink"])
     end
   end
 end
