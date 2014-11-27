@@ -28,4 +28,13 @@ describe SpringMvcScaffold::Execution do
     end
   end
 
+  it "should discover runner and run" do
+    runner = double(SpringMvcScaffold::Runner::Generator)
+    allow(runner).to receive(:new).and_return(runner)
+    expect(runner).to receive(:run).with(['app'])
+
+    allow(subject).to receive(:runner_for).with('new').and_return(runner)
+    subject.run(['new', 'app'])
+  end
+
 end
