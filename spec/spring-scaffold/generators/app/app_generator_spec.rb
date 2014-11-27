@@ -99,6 +99,12 @@ describe AppGenerator do
         exists_and_identical?(source, destination)
       end
 
+      it "should create hibernate.properties" do
+        source = "#{AppGenerator.source_root}/resources/hibernate.properties"
+        destination = "#{main_resources}/hibernate.properties"
+        exists_and_identical?(source, destination)
+      end
+
       it "should create log4j" do
         source = "#{AppGenerator.source_root}/resources/log4j.properties"
         destination = "#{main_resources}/log4j.properties"
