@@ -33,11 +33,11 @@ class AppGenerator < SpringMvcScaffold::Base
   end
 
   def configure_maven
-    template("pom.erb", "pom.xml") if options[:build_tool] == "mvn"
+    template("pom.erb", "pom.xml") if build_tool == "mvn"
   end
 
   def configure_gradle
-    template("build.gradle.erb", "build.gradle") if options[:build_tool] == "gradle"
+    template("build.gradle.erb", "build.gradle") if build_tool == "gradle"
   end
 
   def create_main_java
@@ -58,7 +58,7 @@ class AppGenerator < SpringMvcScaffold::Base
   def create_repositories_directory
     repositories = File.join(@src, options[:repositories_package])
     empty_directory repositories
-    template("orm/Repository-#{options[:orm]}.java.tt", "#{repositories}/Repository.java")
+    template("orm/Repository-#{orm}.java.tt", "#{repositories}/Repository.java")
   end
 
   def create_main_resources
@@ -66,11 +66,11 @@ class AppGenerator < SpringMvcScaffold::Base
   end
 
   def configure_jpa
-    directory("orm/META-INF", Configuration::META_INF) if options[:orm] == "jpa"
+    directory("orm/META-INF", Configuration::META_INF) if orm == "jpa"
   end
 
   def configure_hibernate
-    copy_file("orm/hibernate.cfg.xml", File.join(Configuration::MAIN_RESOURCES, "hibernate.cfg.xml")) if options[:orm] == "hibernate"
+    copy_file("orm/hibernate.cfg.xml", File.join(Configuration::MAIN_RESOURCES, "hibernate.cfg.xml")) if orm == "hibernate"
   end
 
   def create_webapp
@@ -96,12 +96,12 @@ class AppGenerator < SpringMvcScaffold::Base
 
   private
   def validate
-    unless BUILD_TOOLS.include? options[:build_tool]
-      puts "Build tool #{options[:build_tool]} is not supported. The supported build tools are: #{BUILD_TOOLS.join(', ')}"
+    unless BUILD_TOOLS.include? build_tool
+      puts "Build tool #{build_tool} is not supported. The supported build tools are: #{BUILD_TOOLS.join(', ')}"
       Kernel::exit
     end
-    unless ORMS.include? options[:orm]
-      puts "ORM #{options[:orm]} is not supported. The supported object-relational mapping are: #{ORMS.join(", ")}"
+    unless ORMS.include? orm
+      puts "ORM #{orm} is not supported. The supported object-relational mapping are: #{ORMS.join(", ")}"
       Kernel::exit
     end
 
@@ -109,5 +109,13 @@ class AppGenerator < SpringMvcScaffold::Base
       puts "The project #{project_path} already exist"
       Kernel::exit
     end
+  end
+
+  def orm
+    options[:orm]
+  end
+
+  def build_tool
+    options[:build_tool]
   end
 end
