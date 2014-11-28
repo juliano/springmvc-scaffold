@@ -65,6 +65,10 @@ class AppGenerator < SpringMvcScaffold::Base
     directory("orm/META-INF", Configuration::META_INF) if options[:orm] == "jpa"
   end
 
+  def configure_hibernate
+    copy_file("orm/hibernate.cfg.xml", File.join(Configuration::MAIN_RESOURCES, "hibernate.cfg.xml")) if options[:orm] == "hibernate"
+  end
+
   def create_webapp
     @base_package = options[:package]
     directory("webapp", Configuration::WEB_APP)

@@ -5,13 +5,9 @@ describe AppGenerator do
   context "build new application" do
     let(:project_path) { "src/springmvc-scaffold" }
 
-    before do
-      described_class.new(project_path, []).invoke_all
-    end
+    before { described_class.new(project_path, []).invoke_all }
 
-    after do
-      FileUtils.remove_dir("src")
-    end
+    after { FileUtils.remove_dir("src") }
 
     it "should create directory with project name" do
       expect(File.exist?(project_path)).to be true
@@ -93,6 +89,10 @@ describe AppGenerator do
           destination = "#{meta_inf}/persistence.xml"
           exists_and_identical?(source, destination)
         end
+
+        it "cannot create hibernate.cfg.xml" do
+          expect(File.exist?("#{main_resources}/hibernate.cfg.xml")).to be false
+        end
       end
 
       context "hibernate orm" do
@@ -104,8 +104,12 @@ describe AppGenerator do
           described_class.new(@project_path, ["-o=hibernate"]).invoke_all
         end
 
-        after do
-          FileUtils.remove_dir(@project_path)
+        after { FileUtils.remove_dir(@project_path) }
+
+        it "should create hibernate.cfg.xml" do
+          source = "#{AppGenerator.source_root}/orm/hibernate.cfg.xml"
+          destination = "#{@main_resources}/hibernate.cfg.xml"
+          exists_and_identical?(source, destination)
         end
 
         it "cannot create META-INF" do
@@ -178,9 +182,7 @@ describe AppGenerator do
       described_class.new(project_path, ["-p=br.com.juliano"]).invoke_all
     end
 
-    after do
-      FileUtils.remove_dir("src")
-    end
+    after { FileUtils.remove_dir("src") }
 
     it "should create main path" do
       expect(File.exist?(main_java)).to be true
@@ -194,13 +196,9 @@ describe AppGenerator do
   context "creating gradle application" do
     let(:project_path) { "springmvc-scaffold" }
 
-    before do
-      described_class.new(project_path, ["-b=gradle"]).invoke_all
-    end
+    before { described_class.new(project_path, ["-b=gradle"]).invoke_all }
 
-    after do
-      FileUtils.remove_dir(project_path)
-    end
+    after { FileUtils.remove_dir(project_path) }
 
     it "should create build.gradle" do
       source = File.join(File.dirname(__FILE__), "templates", "build.gradle")
