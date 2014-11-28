@@ -61,8 +61,8 @@ class AppGenerator < SpringMvcScaffold::Base
     directory("resources", Configuration::MAIN_RESOURCES)
   end
 
-  def configure_orm
-    directory("orm/META-INF", Configuration::META_INF)
+  def configure_jpa
+    directory("orm/META-INF", Configuration::META_INF) if options[:orm] == "jpa"
   end
 
   def create_webapp

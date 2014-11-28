@@ -57,6 +57,67 @@ describe AppGenerator do
       end
     end
 
+    context "creating main resources" do
+      let(:main_resources) { "#{project_path}/#{Configuration::MAIN_RESOURCES}" }
+      let(:meta_inf) { "#{main_resources}/META-INF" }
+
+      it "should create resources folder" do
+        expect(File.exist?(main_resources)).to be true
+      end
+
+      it "should create hibernate.properties" do
+        source = "#{AppGenerator.source_root}/resources/hibernate.properties"
+        destination = "#{main_resources}/hibernate.properties"
+        exists_and_identical?(source, destination)
+      end
+
+      it "should create log4j" do
+        source = "#{AppGenerator.source_root}/resources/log4j.properties"
+        destination = "#{main_resources}/log4j.properties"
+        exists_and_identical?(source, destination)
+      end
+
+      it "should create messages.properties" do
+        source = "#{AppGenerator.source_root}/resources/messages.properties"
+        destination = "#{main_resources}/messages.properties"
+        exists_and_identical?(source, destination)
+      end
+
+      context "jpa orm" do
+        it "should create META-INF" do
+          expect(File.exist?(meta_inf)).to be true
+        end
+
+        it "should create persistence.xml" do
+          source = "#{AppGenerator.source_root}/orm/META-INF/persistence.xml"
+          destination = "#{meta_inf}/persistence.xml"
+          exists_and_identical?(source, destination)
+        end
+      end
+
+      context "hibernate orm" do
+        before do
+          @project_path = "src/springmvc-scaffold-hibernate"
+          @main_resources = "#{@project_path}/#{Configuration::MAIN_RESOURCES}"
+          @meta_inf = "#{@main_resources}/META-INF"
+
+          described_class.new(@project_path, ["-o=hibernate"]).invoke_all
+        end
+
+        after do
+          FileUtils.remove_dir(@project_path)
+        end
+
+        it "cannot create META-INF" do
+          expect(File.exist?(@meta_inf)).to be false
+        end
+
+        it "cannot create persistence.xml" do
+          expect(File.exist?("#{@meta_inf}/persistence.xml")).to be false
+        end
+      end
+    end
+
     context "creating main webapp" do
       let(:webapp) { "#{project_path}/#{Configuration::WEB_APP}" }
       let(:web_inf) { "#{project_path}/#{Configuration::WEB_INF}" }
@@ -77,43 +138,6 @@ describe AppGenerator do
       it "should create application.css" do
         source = "#{AppGenerator.source_root}/webapp/stylesheets/application.css"
         destination = "#{webapp}/stylesheets/application.css"
-        exists_and_identical?(source, destination)
-      end
-    end
-
-    context "creating main resources" do
-      let(:main_resources) { "#{project_path}/#{Configuration::MAIN_RESOURCES}" }
-      let(:meta_inf) { "#{main_resources}/META-INF" }
-
-      it "should create resources folder" do
-        expect(File.exist?(main_resources)).to be true
-      end
-
-      it "should create META-INF" do
-        expect(File.exist?(meta_inf)).to be true
-      end
-
-      it "should create persistence.xml" do
-        source = "#{AppGenerator.source_root}/orm/META-INF/persistence.xml"
-        destination = "#{meta_inf}/persistence.xml"
-        exists_and_identical?(source, destination)
-      end
-
-      it "should create hibernate.properties" do
-        source = "#{AppGenerator.source_root}/resources/hibernate.properties"
-        destination = "#{main_resources}/hibernate.properties"
-        exists_and_identical?(source, destination)
-      end
-
-      it "should create log4j" do
-        source = "#{AppGenerator.source_root}/resources/log4j.properties"
-        destination = "#{main_resources}/log4j.properties"
-        exists_and_identical?(source, destination)
-      end
-
-      it "should create messages.properties" do
-        source = "#{AppGenerator.source_root}/resources/messages.properties"
-        destination = "#{main_resources}/messages.properties"
         exists_and_identical?(source, destination)
       end
     end
