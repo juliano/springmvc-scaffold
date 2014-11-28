@@ -50,7 +50,9 @@ class AppGenerator < SpringMvcScaffold::Base
   end
 
   def create_models_directory
-    empty_directory File.join(@src, options[:models_package])
+    models = File.join(@src, options[:models_package])
+    empty_directory models
+    template("models/Entity.erb", "#{models}/Entity.java")
   end
 
   def create_repositories_directory

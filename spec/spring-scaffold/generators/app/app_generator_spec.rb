@@ -48,6 +48,12 @@ describe AppGenerator do
         expect(File.exist?("#{app}/models")).to be true
       end
 
+      it "should create generic entity" do
+        source = File.join(File.dirname(__FILE__), "templates", "Entity.java")
+        destination = "#{app}/models/Entity.java"
+        exists_and_identical?(source, destination)
+      end
+
       it "should create repositories folder" do
         expect(File.exist?("#{app}/repositories")).to be true
       end
