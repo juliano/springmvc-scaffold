@@ -57,6 +57,12 @@ describe AppGenerator do
       it "should create repositories folder" do
         expect(File.exist?("#{app}/repositories")).to be true
       end
+
+      it "should create generic repository" do
+        source =  File.join(File.dirname(__FILE__), "templates", "RepositoryJPA.java")
+        destination = "#{app}/repositories/Repository.java"
+        exists_and_identical?(source, destination)
+      end
     end
 
     context "creating main resources" do

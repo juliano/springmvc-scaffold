@@ -56,7 +56,9 @@ class AppGenerator < SpringMvcScaffold::Base
   end
 
   def create_repositories_directory
-    empty_directory File.join(@src, options[:repositories_package])
+    repositories = File.join(@src, options[:repositories_package])
+    empty_directory repositories
+    template("orm/Repository-#{options[:orm]}.java.tt", "#{repositories}/Repository.java")
   end
 
   def create_main_resources
