@@ -21,7 +21,7 @@ public abstract class Repository<T, I extends Serializable> {
 		this.clazz = clazz;
 	}
 	
-	public void create(T entity) {
+	public void add(T entity) {
 		session.persist(entity);
 	}
 	
@@ -30,21 +30,18 @@ public abstract class Repository<T, I extends Serializable> {
 		return (T) session.merge(entity);
 	}
 	
-	public void destroy(T entity) {
+	public void remove(T entity) {
 		session.delete(entity);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public T find(I id) {
+	public T get(I id) {
 		return (T) session.get(clazz, id);
 	}
 	
-	public List<T> findAll() {
+	@SuppressWarnings("unchecked")
+	public List<T> getAll() {
 		Query query = session.createQuery("from " + clazz.getName());
-
-		@SuppressWarnings("unchecked")
-		List<T> resultList = query.list();
-
-		return resultList;
+		return query.list();
 	}
 }
