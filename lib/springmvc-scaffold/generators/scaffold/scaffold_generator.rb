@@ -1,0 +1,2 @@
+class ScaffoldGenerator
+end
