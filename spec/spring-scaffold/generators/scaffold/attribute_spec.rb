@@ -178,5 +178,15 @@ describe Attribute do
       end
     end
 
+    context "boolean?" do
+      it "should be boolean when type is boolean" do
+        expect(described_class.new("flag", "boolean").boolean?).to be true
+      end
+
+      it "cannot be boolean otherwise" do
+        expect(described_class.new("flag", "short").boolean?).to be false
+      end
+    end
+
   end
 end
