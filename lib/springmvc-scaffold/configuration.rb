@@ -8,6 +8,10 @@ class Configuration
   TEST_RESOURCES = "src/test/resources"
   FILENAME = "#{META_INF}/springmvc-scaffold.properties"
 
+  def self.config
+    YAML.load_file FILENAME
+  end
+
   def self.package
     config["package"] ? config["package"] : 'app'
   end
