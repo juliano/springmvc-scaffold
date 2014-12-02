@@ -1,7 +1,8 @@
 class BaseScaffold < SpringMvcScaffold::Base
   
-  def initialize(model)
+  def initialize(model, attributes={})
     @model = model
+    @attributes = attributes
   end
 
   def class_name
