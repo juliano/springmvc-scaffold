@@ -159,5 +159,24 @@ describe Attribute do
       end
     end
 
+    context "validate" do
+      it "should be valid when attribute is supported" do
+        expect(Kernel).to_not receive(:exit)
+        described_class::VALID_TYPES.each do |type|
+          described_class.new("name", type)
+        end
+      end
+
+      it "cannot be valid when attribute is not supported" do
+        expect(Kernel).to receive(:exit)
+        described_class.new("name", "char")
+      end
+
+      it "should be valid when attribute is upper case" do
+        expect(Kernel).to_not receive(:exit)
+        described_class.new("name", "String")
+      end
+    end
+
   end
 end
