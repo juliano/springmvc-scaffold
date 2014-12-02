@@ -28,4 +28,22 @@ describe BaseScaffold do
       expect(subject.controller_test_class_name).to eq "ClientControllerTest"
     end
   end
+
+  context "compound model name" do
+    it "should know class name to 'orderItem'" do
+      expect(described_class.new('orderItem').class_name).to eq "OrderItem"
+    end
+
+    it "should know class name to 'OrderItem'" do
+      expect(described_class.new('OrderItem').class_name).to eq "OrderItem"
+    end
+
+    it "should know parameter name to 'OrderItem'" do
+      expect(described_class.new("OrderItem").model_parameter_name).to eq "orderItem"
+    end
+
+    it "should know parameter name to 'OrderItem'" do
+      expect(described_class.new("orderItem").model_parameter_name).to eq "orderItem"
+    end
+  end
 end

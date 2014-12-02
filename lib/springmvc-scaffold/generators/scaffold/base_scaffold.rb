@@ -8,6 +8,10 @@ class BaseScaffold < SpringMvcScaffold::Base
     @model.camelize
   end
 
+  def model_parameter_name
+    @model.camelize(:lower)
+  end
+
   def test_class_name
     "#{class_name}Test"
   end
