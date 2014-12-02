@@ -74,7 +74,7 @@ class AppGenerator < SpringMvcScaffold::Base
     if orm == "jpa"
       metainf = File.join(Configuration::MAIN_RESOURCES, 'META-INF')
       empty_directory metainf
-      copy_file("orm/META-INF/persistence.xml", (File.join(metainf, "persistence.xml")))
+      copy_file("orm/persistence.xml", (File.join(metainf, "persistence.xml")))
     end
   end
 
@@ -85,6 +85,10 @@ class AppGenerator < SpringMvcScaffold::Base
   def create_javascripts
     javascripts = File.join(Configuration::WEB_APP, "javascripts")
     create_file File.join(javascripts, "application.js")
+  end
+
+  def configure_scaffold_properties
+    template("springmvc-scaffold.erb", Configuration::FILENAME)
   end
 
   def create_test

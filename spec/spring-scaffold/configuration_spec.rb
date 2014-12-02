@@ -29,4 +29,8 @@ describe Configuration do
   it "should configure test resources" do
     expect(Configuration::TEST_RESOURCES).to eq "src/test/resources"
   end
+
+  it "should configure scaffold properties" do
+    expect(Configuration::FILENAME).to eq "#{Configuration::META_INF}/springmvc-scaffold.properties"
+  end
 end

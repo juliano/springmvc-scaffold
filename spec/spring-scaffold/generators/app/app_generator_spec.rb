@@ -28,6 +28,12 @@ describe AppGenerator do
       expect(File.exist?("#{project_path}/build.gradle")).to be false
     end
 
+    it "should configure springmvc-scaffold.properties" do
+      source = File.join(File.dirname(__FILE__), "templates", "springmvc-scaffold.properties")
+      destination = "#{project_path}/#{Configuration::FILENAME}"
+      exists_and_identical?(source, destination)
+    end
+
     context "creating main java" do
       let(:main_java) { "#{project_path}/#{Configuration::MAIN_SRC}" }
       let(:app) { "#{main_java}/app" }
@@ -97,7 +103,7 @@ describe AppGenerator do
         end
 
         it "should create persistence.xml" do
-          source = "#{AppGenerator.source_root}/orm/META-INF/persistence.xml"
+          source = "#{AppGenerator.source_root}/orm/persistence.xml"
           destination = "#{meta_inf}/persistence.xml"
           exists_and_identical?(source, destination)
         end
