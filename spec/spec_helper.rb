@@ -10,3 +10,8 @@ def build_attributes
   [Attribute.new("name", "string"), Attribute.new("active", "boolean"),
    Attribute.new("price", "double"), Attribute.new("category", "references")]
 end
+
+def mock_config_file
+  file = YAML.load_file(File.join(File.dirname(__FILE__), "spring-scaffold/generators/app/templates/springmvc-scaffold.properties"))
+  allow(Configuration).to receive(:config).and_return(file)
+end
