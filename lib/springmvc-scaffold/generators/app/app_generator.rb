@@ -65,17 +65,21 @@ class AppGenerator < SpringMvcScaffold::Base
     directory("resources", Configuration::MAIN_RESOURCES)
   end
 
+  def create_webapp
+    @base_package = options[:package]
+    directory("webapp", Configuration::WEB_APP)
+  end
+
   def configure_jpa
-    directory("orm/META-INF", Configuration::META_INF) if orm == "jpa"
+    if orm == "jpa"
+      metainf = File.join(Configuration::MAIN_RESOURCES, 'META-INF')
+      empty_directory metainf
+      copy_file("orm/META-INF/persistence.xml", (File.join(metainf, "persistence.xml")))
+    end
   end
 
   def configure_hibernate
     copy_file("orm/hibernate.cfg.xml", File.join(Configuration::MAIN_RESOURCES, "hibernate.cfg.xml")) if orm == "hibernate"
-  end
-
-  def create_webapp
-    @base_package = options[:package]
-    directory("webapp", Configuration::WEB_APP)
   end
 
   def create_javascripts
