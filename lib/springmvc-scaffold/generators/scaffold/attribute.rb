@@ -25,6 +25,15 @@ class Attribute
     type == "boolean"
   end
 
+  def java_type
+    java = type.capitalize
+    java = "boolean" if boolean?
+    java = "String" if type.eql?("text")
+    java = "Date" if type.eql?("date")
+    java = name.camelize if type.eql?("references")
+    java
+  end
+
   def html_input
     input = "text"
     input = "checkbox" if boolean?
