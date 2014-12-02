@@ -71,12 +71,50 @@ describe Attribute do
       expect(valid_types.include?("text")).to be true
     end
 
-    it "should suport date" do
+    it "supports date" do
       expect(valid_types.include?("date")).to be true
     end
 
     it "do not support other" do
       expect(valid_types.include?("other")).to be false
+    end
+
+    context "html_input" do
+      it "should know html input to boolean" do
+        expect(described_class.new("flag", "boolean").html_input).to eq "checkbox"
+      end
+
+      it "should know html input to string" do
+        expect(described_class.new("name", "string").html_input).to eq "text"
+      end
+
+      it "should know html input to double" do
+        expect(described_class.new("name", "double").html_input).to eq "text"
+      end
+
+      it "should know html input to float" do
+        expect(described_class.new("name", "float").html_input).to eq "text"
+      end
+
+      it "should know html input to short" do
+        expect(described_class.new("name", "short").html_input).to eq "text"
+      end
+
+      it "should know html input to integer" do
+        expect(described_class.new("name", "integer").html_input).to eq "text"
+      end
+
+      it "should know html input to long" do
+        expect(described_class.new("name", "long").html_input).to eq "text"
+      end
+
+      it "should know html input to text" do
+        expect(described_class.new("name", "text").html_input).to eq "textarea"
+      end
+
+      it "should know html input to date" do
+        expect(described_class.new("price", "date").html_input).to eq "text"
+      end
     end
   end
 end

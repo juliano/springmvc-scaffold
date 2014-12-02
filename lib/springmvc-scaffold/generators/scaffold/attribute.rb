@@ -24,4 +24,11 @@ class Attribute
   def boolean?
     type == "boolean"
   end
+
+  def html_input
+    input = "text"
+    input = "checkbox" if boolean?
+    input = "textarea" if type == "text"
+    input
+  end
 end
