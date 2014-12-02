@@ -27,44 +27,46 @@ describe Attribute do
   end
 
   context "supported types" do
-    it "should support boolean" do
-      expect(described_class::VALID_TYPES.include?("boolean")).to be true
+    subject(:valid_types) { described_class::VALID_TYPES }
+
+    it "supports boolean" do
+      expect(valid_types.include?("boolean")).to be true
     end
 
-    it "should support double" do
-      expect(described_class::VALID_TYPES.include?("double")).to be true
+    it "supports double" do
+      expect(valid_types.include?("double")).to be true
     end
 
-    it "should support string" do
-      expect(described_class::VALID_TYPES.include?("string")).to be true
+    it "supports string" do
+      expect(valid_types.include?("string")).to be true
     end
 
-    it "should support float" do
-      expect(described_class::VALID_TYPES.include?("float")).to be true
+    it "supports float" do
+      expect(valid_types.include?("float")).to be true
     end
 
-    it "should support short" do
-      expect(described_class::VALID_TYPES.include?("short")).to be true
+    it "supports short" do
+      expect(valid_types.include?("short")).to be true
     end
 
-    it "should support integer" do
-      expect(described_class::VALID_TYPES.include?("integer")).to be true
+    it "supports integer" do
+      expect(valid_types.include?("integer")).to be true
     end
 
-    it "should support long" do
-      expect(described_class::VALID_TYPES.include?("long")).to be true
+    it "supports long" do
+      expect(valid_types.include?("long")).to be true
     end
 
-    it "should support text" do
-      expect(described_class::VALID_TYPES.include?("text")).to be true
-    end
-
-    it "should not support other" do
-      expect(described_class::VALID_TYPES.include?("other")).to be false
+    it "supports text" do
+      expect(valid_types.include?("text")).to be true
     end
 
     it "should suport date" do
-      expect(described_class::VALID_TYPES.include?("date")).to be true
+      expect(valid_types.include?("date")).to be true
+    end
+
+    it "do not support other" do
+      expect(valid_types.include?("other")).to be false
     end
   end
 end
