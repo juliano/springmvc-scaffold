@@ -15,4 +15,13 @@ class Attribute
       Kernel::exit
     end
   end
+
+  def getter_prefix
+    return "is" if boolean?
+    "get"
+  end
+
+  def boolean?
+    type == "boolean"
+  end
 end
