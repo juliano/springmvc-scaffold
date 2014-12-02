@@ -78,115 +78,128 @@ describe Attribute do
     it "do not support other" do
       expect(valid_types.include?("other")).to be false
     end
+  end
 
-    context "html_input" do
-      it "knows html input to boolean" do
-        expect(described_class.new("flag", "boolean").html_input).to eq "checkbox"
-      end
+  context "html_input" do
+    it "knows html input to boolean" do
+      expect(described_class.new("flag", "boolean").html_input).to eq "checkbox"
+    end
 
-      it "knows html input to string" do
-        expect(described_class.new("name", "string").html_input).to eq "text"
-      end
+    it "knows html input to string" do
+      expect(described_class.new("name", "string").html_input).to eq "text"
+    end
 
-      it "knows html input to double" do
-        expect(described_class.new("name", "double").html_input).to eq "text"
-      end
+    it "knows html input to double" do
+      expect(described_class.new("name", "double").html_input).to eq "text"
+    end
 
-      it "knows html input to float" do
-        expect(described_class.new("name", "float").html_input).to eq "text"
-      end
+    it "knows html input to float" do
+      expect(described_class.new("name", "float").html_input).to eq "text"
+    end
 
-      it "knows html input to short" do
-        expect(described_class.new("name", "short").html_input).to eq "text"
-      end
+    it "knows html input to short" do
+      expect(described_class.new("name", "short").html_input).to eq "text"
+    end
 
-      it "knows html input to integer" do
-        expect(described_class.new("name", "integer").html_input).to eq "text"
-      end
+    it "knows html input to integer" do
+      expect(described_class.new("name", "integer").html_input).to eq "text"
+    end
 
-      it "knows html input to long" do
-        expect(described_class.new("name", "long").html_input).to eq "text"
-      end
+    it "knows html input to long" do
+      expect(described_class.new("name", "long").html_input).to eq "text"
+    end
 
-      it "knows html input to text" do
-        expect(described_class.new("name", "text").html_input).to eq "textarea"
-      end
+    it "knows html input to text" do
+      expect(described_class.new("name", "text").html_input).to eq "textarea"
+    end
 
-      it "knows html input to date" do
-        expect(described_class.new("price", "date").html_input).to eq "text"
+    it "knows html input to date" do
+      expect(described_class.new("price", "date").html_input).to eq "text"
+    end
+  end
+
+  context "java type" do
+    it "knows correct java type to boolean" do
+      expect(described_class.new("flag", "boolean").java_type).to eq "boolean"
+    end
+
+    it "knows correct java type to text" do
+      expect(described_class.new("description", "text").java_type).to eq "String"
+    end
+
+    it "knows correct java type to string" do
+      expect(described_class.new("name", "string").java_type).to eq "String"
+    end
+
+    it "knows correct java type to double" do
+      expect(described_class.new("name", "double").java_type).to eq "Double"
+    end
+
+    it "knows correct java type to float" do
+      expect(described_class.new("name", "float").java_type).to eq "Float"
+    end
+
+    it "knows correct java type to short" do
+      expect(described_class.new("name", "short").java_type).to eq "Short"
+    end
+
+    it "knows correct java type to integer" do
+      expect(described_class.new("name", "integer").java_type).to eq "Integer"
+    end
+
+    it "knows correct java type to long" do
+      expect(described_class.new("name", "long").java_type).to eq "Long"
+    end
+
+    it "knows correct java type to Date" do
+      expect(described_class.new("price", "date").java_type).to eq "Date"
+    end
+
+    it "knows correct type to relationship many to one" do
+      expect(described_class.new("product", "references").java_type).to eq "Product"
+    end
+  end
+
+  context "validate" do
+    it "should be valid when attribute is supported" do
+      expect(Kernel).to_not receive(:exit)
+      described_class::VALID_TYPES.each do |type|
+        described_class.new("name", type)
       end
     end
 
-    context "java type" do
-      it "knows correct java type to boolean" do
-        expect(described_class.new("flag", "boolean").java_type).to eq "boolean"
-      end
-
-      it "knows correct java type to text" do
-        expect(described_class.new("description", "text").java_type).to eq "String"
-      end
-
-      it "knows correct java type to string" do
-        expect(described_class.new("name", "string").java_type).to eq "String"
-      end
-
-      it "knows correct java type to double" do
-        expect(described_class.new("name", "double").java_type).to eq "Double"
-      end
-
-      it "knows correct java type to float" do
-        expect(described_class.new("name", "float").java_type).to eq "Float"
-      end
-
-      it "knows correct java type to short" do
-        expect(described_class.new("name", "short").java_type).to eq "Short"
-      end
-
-      it "knows correct java type to integer" do
-        expect(described_class.new("name", "integer").java_type).to eq "Integer"
-      end
-
-      it "knows correct java type to long" do
-        expect(described_class.new("name", "long").java_type).to eq "Long"
-      end
-
-      it "knows correct java type to Date" do
-        expect(described_class.new("price", "date").java_type).to eq "Date"
-      end
-
-      it "knows correct type to relationship many to one" do
-        expect(described_class.new("product", "references").java_type).to eq "Product"
-      end
+    it "cannot be valid when attribute is not supported" do
+      expect(Kernel).to receive(:exit)
+      described_class.new("name", "char")
     end
 
-    context "validate" do
-      it "should be valid when attribute is supported" do
-        expect(Kernel).to_not receive(:exit)
-        described_class::VALID_TYPES.each do |type|
-          described_class.new("name", type)
-        end
-      end
+    it "should be valid when attribute is upper case" do
+      expect(Kernel).to_not receive(:exit)
+      described_class.new("name", "String")
+    end
+  end
 
-      it "cannot be valid when attribute is not supported" do
-        expect(Kernel).to receive(:exit)
-        described_class.new("name", "char")
-      end
-
-      it "should be valid when attribute is upper case" do
-        expect(Kernel).to_not receive(:exit)
-        described_class.new("name", "String")
-      end
+  context "boolean?" do
+    it "should be boolean when type is boolean" do
+      expect(described_class.new("flag", "boolean").boolean?).to be true
     end
 
-    context "boolean?" do
-      it "should be boolean when type is boolean" do
-        expect(described_class.new("flag", "boolean").boolean?).to be true
-      end
+    it "cannot be boolean otherwise" do
+      expect(described_class.new("flag", "short").boolean?).to be false
+    end
+  end
 
-      it "cannot be boolean otherwise" do
-        expect(described_class.new("flag", "short").boolean?).to be false
-      end
+  context "html label" do
+    it "should humanize composed name" do
+      expect(described_class.new("MyItem", "double").html_label).to eq "My item"
     end
 
+    it "should humanize composed name" do
+      expect(described_class.new("myItem", "double").html_label).to eq "My item"
+    end
+
+    it "should humanize single name" do
+      expect(described_class.new("item", "double").html_label).to eq "Item"
+    end
   end
 end

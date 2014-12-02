@@ -40,4 +40,8 @@ class Attribute
     input = "textarea" if type == "text"
     input
   end
+
+  def html_label
+    @name.underscore.humanize
+  end
 end
