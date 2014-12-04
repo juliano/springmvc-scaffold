@@ -33,4 +33,15 @@ describe Configuration do
   it "should configure scaffold properties" do
     expect(Configuration::FILENAME).to eq "#{Configuration::META_INF}/springmvc-scaffold.properties"
   end
+
+  context "load config file" do
+    before do
+      config = {"template_engine" => "jsp", "package" => "br.com.juliano", "orm" => "jpa", "models_package" => "models", "controllers_package" => "controllers", "repositories_package" => "repositories"}
+      allow(YAML).to receive(:load_file).with(Configuration::FILENAME).and_return(config)
+    end
+
+    it "knows models package" do
+      expect(Configuration.models_package).to eq "models"
+    end
+  end
 end

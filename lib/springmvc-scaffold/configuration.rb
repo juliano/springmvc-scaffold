@@ -16,6 +16,10 @@ class Configuration
     config["package"] ? config["package"] : 'app'
   end
 
+  def self.models_package
+    config["models_package"] ? config["models_package"] : 'models'
+  end
+
   def self.main_class_path(*path)
     File.join(MAIN_SRC, package.gsub(".", File::Separator), path)
   end
