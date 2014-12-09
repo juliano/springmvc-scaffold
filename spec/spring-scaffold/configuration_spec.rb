@@ -43,5 +43,9 @@ describe Configuration do
     it "knows models package" do
       expect(Configuration.models_package).to eq "models"
     end
+
+    it "should know full models package" do
+      expect(Configuration.full_models_package).to eq "br.com.juliano.models"
+    end
   end
 end

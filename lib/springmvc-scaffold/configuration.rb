@@ -20,6 +20,10 @@ class Configuration
     config["models_package"] ? config["models_package"] : 'models'
   end
 
+  def self.full_models_package
+    "#{package}.#{models_package}"
+  end
+
   def self.main_class_path(*path)
     File.join(MAIN_SRC, package.gsub(".", File::Separator), path)
   end
