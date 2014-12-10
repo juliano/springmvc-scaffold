@@ -28,6 +28,10 @@ class Attribute
     type == "boolean"
   end
 
+  def declaration
+    "#{java_type} #{name}"
+  end
+
   def java_type
     java = type.capitalize
     java = "boolean" if boolean?

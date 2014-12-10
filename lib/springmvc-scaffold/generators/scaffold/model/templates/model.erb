@@ -4,11 +4,11 @@ package <%= Configuration.full_models_package %>;
 public class <%= class_name %> extends Entity {
 
 <% @attributes.each do |att| -%>
-	private <%= att.java_type %> <%= att.name %>;
+	private <%= att.declaration %>;
 <% end -%>
 
 <% @attributes.each do |att| -%>
-	public void <%= att.setter_name %>(<%= att.java_type %> <%= att.name %>) {
+	public void <%= att.setter_name %>(<%= att.declaration %>) {
 		this.<%= att.name %> = <%= att.name %>;
 	}
 

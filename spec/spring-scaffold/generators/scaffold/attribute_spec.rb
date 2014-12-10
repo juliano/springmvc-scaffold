@@ -16,6 +16,12 @@ describe Attribute do
     expect(described_class.new("name", "string").setter_name).to eq "setName"
   end
 
+  context "declaration" do
+    it "includes java type and attribute name" do
+      expect(described_class.new("name", "text").declaration). to eq "String name"
+    end
+  end
+
   context "initialize attribute" do
     context "downcase name" do
       it "should downcase all words" do
