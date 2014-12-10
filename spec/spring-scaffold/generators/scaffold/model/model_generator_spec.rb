@@ -19,5 +19,10 @@ describe ModelGenerator do
       destination = Configuration.main_class_path("models", "Product.java")
       exists_and_identical?(source, destination)
     end
+
+    it "creates model test" do
+      test_class = Configuration.test_class_path "models", "ProductTest.java"
+      expect(File.exist?(test_class)).to be true
+    end
   end
 end

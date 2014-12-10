@@ -1,0 +1,13 @@
+package <%= Configuration.full_models_package %>;
+
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Test;
+
+public class <%= test_class_name %> {
+
+	@Test
+	public void fakeTest() {
+    assertNotNull("test something real", new <%= class_name %>());
+	}
+}
