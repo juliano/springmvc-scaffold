@@ -35,8 +35,8 @@ describe Configuration do
   end
 
   context "load config file" do
+    let(:config) { {"template_engine" => "jsp", "package" => "br.com.juliano", "orm" => "jpa", "models_package" => "models", "controllers_package" => "controllers", "repositories_package" => "repositories"} }
     before do
-      config = {"template_engine" => "jsp", "package" => "br.com.juliano", "orm" => "jpa", "models_package" => "models", "controllers_package" => "controllers", "repositories_package" => "repositories"}
       allow(YAML).to receive(:load_file).with(Configuration::FILENAME).and_return(config)
     end
 
