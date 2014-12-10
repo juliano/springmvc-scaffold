@@ -1,6 +1,7 @@
 class BaseScaffold < SpringMvcScaffold::Base
-  
+
   def initialize(model, attributes={})
+    super()
     @model = model
     @attributes = attributes
   end
@@ -31,5 +32,11 @@ class BaseScaffold < SpringMvcScaffold::Base
 
   def controller_test_class_name
     "#{class_name}ControllerTest"
+  end
+
+  protected
+  def define_source_paths
+    source_paths << File.expand_path(template_path) if File.exist?(template_path)
+    source_paths << source_root
   end
 end

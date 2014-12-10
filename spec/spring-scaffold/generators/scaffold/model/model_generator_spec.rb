@@ -7,12 +7,16 @@ describe ModelGenerator do
   end
 
   context "jpa" do
-    subject { described_class.new("product", build_attributes) }
+    before do
+      mock_config_file
+      described_class.new("product", build_attributes).build
+    end
+
+    after { FileUtils.remove_dir("src") }
 
     it "should create model" do
-      mock_config_file
       source = File.join(File.dirname(__FILE__), "templates", "Product.java")
-      destination = Configuration.main_class_path("model", "Product.java")
+      destination = Configuration.main_class_path("models", "Product.java")
       exists_and_identical?(source, destination)
     end
   end
