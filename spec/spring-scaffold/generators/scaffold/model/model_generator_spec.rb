@@ -14,7 +14,7 @@ describe ModelGenerator do
 
     after { FileUtils.remove_dir("src") }
 
-    it "should create model" do
+    it "creates model" do
       source = File.join(File.dirname(__FILE__), "templates", "Product.java")
       destination = Configuration.main_class_path("models", "Product.java")
       exists_and_identical?(source, destination)

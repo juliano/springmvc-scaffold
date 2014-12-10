@@ -44,8 +44,16 @@ describe Configuration do
       expect(Configuration.models_package).to eq "models"
     end
 
-    it "should know full models package" do
+    it "knows full models package" do
       expect(Configuration.full_models_package).to eq "br.com.juliano.models"
+    end
+
+    it "builds main class path with base package" do
+      expect(Configuration.main_class_path("models", "Product.java")).to eq "src/main/java/br/com/juliano/models/Product.java"
+    end
+
+    it "builds test class path with base package" do
+      expect(Configuration.test_class_path("models", "Product.java")).to eq "src/test/java/br/com/juliano/models/Product.java"
     end
   end
 end
