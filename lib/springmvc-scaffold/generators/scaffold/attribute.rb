@@ -20,6 +20,10 @@ class Attribute
     getter_prefix + name.camelize
   end
 
+  def setter_name
+    "set#{name.camelize}"
+  end
+
   def boolean?
     type == "boolean"
   end

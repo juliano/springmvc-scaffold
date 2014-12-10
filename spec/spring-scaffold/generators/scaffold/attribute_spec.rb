@@ -12,6 +12,10 @@ describe Attribute do
     end
   end
 
+  it "setter name" do
+    expect(described_class.new("name", "string").setter_name).to eq "setName"
+  end
+
   context "initialize attribute" do
     context "downcase name" do
       it "should downcase all words" do

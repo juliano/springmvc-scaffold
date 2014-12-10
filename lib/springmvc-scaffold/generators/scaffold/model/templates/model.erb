@@ -8,7 +8,7 @@ public class <%= class_name %> extends Entity {
 <% end -%>
 
 <% @attributes.each do |att| -%>
-	public void set<%= att.name.camelize %>(<%= att.java_type %> <%= att.name %>) {
+	public void <%= att.setter_name %>(<%= att.java_type %> <%= att.name %>) {
 		this.<%= att.name %> = <%= att.name %>;
 	}
 
