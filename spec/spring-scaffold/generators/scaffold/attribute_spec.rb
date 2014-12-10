@@ -2,13 +2,13 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../spec_helper")
 
 describe Attribute do
 
-  context "getter method prefix" do
-    it "should be 'is' to boolean attributes" do
-      expect(described_class.new("active", "boolean").getter_prefix).to eq "is"
+  context "getter name" do
+    it "'is' to boolean attributes" do
+      expect(described_class.new("active", "boolean").getter_name).to eq "isActive"
     end
 
-    it "should be 'get' otherwise" do
-      expect(described_class.new("description", "string").getter_prefix).to eq "get"
+    it "'get' otherwise" do
+      expect(described_class.new("description", "string").getter_name).to eq "getDescription"
     end
   end
 

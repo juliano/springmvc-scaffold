@@ -12,7 +12,7 @@ public class <%= class_name %> extends Entity {
 		this.<%= att.name %> = <%= att.name %>;
 	}
 
-	public <%= att.java_type %> <%= att.getter_prefix + att.name.camelize %>() {
+	public <%= att.java_type %> <%= att.getter_name %>() {
 		return <%= att.name %>;
 	}
 

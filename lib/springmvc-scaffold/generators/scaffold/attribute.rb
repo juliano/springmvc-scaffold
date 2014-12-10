@@ -16,9 +16,8 @@ class Attribute
     end
   end
 
-  def getter_prefix
-    return "is" if boolean?
-    "get"
+  def getter_name
+    getter_prefix + name.camelize
   end
 
   def boolean?
@@ -43,5 +42,11 @@ class Attribute
 
   def html_label
     @name.underscore.humanize
+  end
+
+  private
+  def getter_prefix
+    return "is" if boolean?
+    "get"
   end
 end
