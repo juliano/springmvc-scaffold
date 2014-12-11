@@ -19,11 +19,11 @@ class BaseScaffold < SpringMvcScaffold::Base
   end
 
   def repository_class_name
-    "#{class_name}Repository"
+    "#{class_name.pluralize}"
   end
 
   def repository_test_class_name
-    "#{class_name}RepositoryTest"
+    "#{class_name.pluralize}Test"
   end
 
   def controller_class_name
