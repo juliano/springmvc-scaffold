@@ -1,0 +1,12 @@
+package <%= Configuration.package %>.<%= Configuration.controllers_package %>;
+
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Test;
+
+public class <%= controller_test_class_name %> {
+
+	@Test public void fakeTest() {
+		assertNotNull("test something real", new <%= controller_class_name %>());
+ 	}
+}

@@ -31,7 +31,7 @@ class BaseScaffold < SpringMvcScaffold::Base
   end
 
   def controller_test_class_name
-    "#{class_name}ControllerTest"
+    "#{class_name.pluralize}ControllerTest"
   end
 
   def base_path
