@@ -37,6 +37,17 @@ describe ControllerGenerator do
 
     context "from a uppercase name" do
       before { described_class.new("Product", build_attributes).build }
+
+      it "creates controller" do
+        source = File.join(File.dirname(__FILE__), "templates", "ProductsController.java")
+        destination = Configuration.main_class_path("controllers", "ProductsController.java")
+        exists_and_identical?(source, destination)
+      end
+
+      it "creates controller test" do
+        test_class = Configuration.test_class_path "controllers", "ProductsControllerTest.java"
+        expect(File.exist?(test_class)).to be true
+      end
     end
   end
 end
