@@ -24,6 +24,14 @@ class Configuration
     "#{package}.#{models_package}"
   end
 
+  def self.orm
+    config["orm"] ? config["orm"] : 'jpa'
+  end
+
+  def self.hibernate?
+    orm.eql? "hibernate"
+  end
+
   def self.main_class_path(*path)
     File.join(MAIN_SRC, package.gsub(".", File::Separator), path)
   end

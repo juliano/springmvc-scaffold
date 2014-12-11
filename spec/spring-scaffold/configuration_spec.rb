@@ -2,35 +2,35 @@ require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 
 describe Configuration do
 
-  it "should configure main source" do
+  it "configures main source" do
     expect(Configuration::MAIN_SRC).to eq "src/main/java"
   end
 
-  it "should configure main resources" do
+  it "configures main resources" do
     expect(Configuration::MAIN_RESOURCES).to eq "src/main/resources"
   end
 
-  it "should configure webapp" do
+  it "configures webapp" do
     expect(Configuration::WEB_APP).to eq "src/main/webapp"
   end
 
-  it "should configure web-inf" do
+  it "configures web-inf" do
     expect(Configuration::WEB_INF).to eq "#{Configuration::WEB_APP}/WEB-INF"
   end
 
-  it "should configure meta-inf" do
+  it "configures meta-inf" do
     expect(Configuration::META_INF).to eq "#{Configuration::WEB_APP}/META-INF"
   end
 
-  it "should configure test source" do
+  it "configures test source" do
     expect(Configuration::TEST_SRC).to eq "src/test/java"
   end
 
-  it "should configure test resources" do
+  it "configures test resources" do
     expect(Configuration::TEST_RESOURCES).to eq "src/test/resources"
   end
 
-  it "should configure scaffold properties" do
+  it "configures scaffold properties" do
     expect(Configuration::FILENAME).to eq "#{Configuration::META_INF}/springmvc-scaffold.properties"
   end
 
@@ -54,6 +54,14 @@ describe Configuration do
 
     it "builds test class path with base package" do
       expect(Configuration.test_class_path("models", "Product.java")).to eq "src/test/java/br/com/juliano/models/Product.java"
+    end
+
+    it "knows orm" do
+      expect(Configuration.orm).to eq "jpa"
+    end
+
+    it "orm is not hibernate" do
+      expect(Configuration.hibernate?).to be false
     end
   end
 end
