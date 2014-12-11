@@ -20,6 +20,14 @@ class Configuration
     config["models_package"] ? config["models_package"] : 'models'
   end
 
+  def self.controllers_package
+    config["controllers_package"] ? config["controllers_package"] : 'controllers'
+  end
+
+  def self.repositories_package
+    config["repositories_package"] ? config["repositories_package"] : 'repositories'
+  end
+
   def self.full_models_package
     "#{package}.#{models_package}"
   end

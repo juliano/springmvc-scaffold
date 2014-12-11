@@ -64,4 +64,61 @@ describe Configuration do
       expect(Configuration.hibernate?).to be false
     end
   end
+
+  context "hibernate" do
+    let(:config) { {"package" => "br.com.juliano", "orm" => "hibernate"} }
+    before do
+      allow(YAML).to receive(:load_file).with(Configuration::FILENAME).and_return(config)
+    end
+
+    it "knows orm" do
+      expect(Configuration.orm).to eq "hibernate"
+    end
+
+    it "orm is hibernate" do
+      expect(Configuration.hibernate?).to be true
+    end
+  end
+
+  context "properties without default configs" do
+    before do
+      allow(YAML).to receive(:load_file).with(Configuration::FILENAME).and_return({})
+    end
+
+    it "knows models package" do
+      expect(Configuration.models_package).to eq "models"
+    end
+
+    it "knows controllers package" do
+      expect(Configuration.controllers_package).to eq "controllers"
+    end
+
+    it "knows repositories package" do
+      expect(Configuration.repositories_package).to eq "repositories"
+    end
+
+    it "knows full models package" do
+      expect(Configuration.full_models_package).to eq "app.models"
+    end
+
+    it "knows base package" do
+      expect(Configuration.package).to eq "app"
+    end
+
+    it "knows orm" do
+      expect(Configuration.orm).to eq "jpa"
+    end
+
+    it "orm is not hibernate" do
+      expect(Configuration.hibernate?).to be false
+    end
+
+    it "builds main class path with base package" do
+      expect(Configuration.main_class_path("models", "Product.java")).to eq "src/main/java/app/models/Product.java"
+    end
+
+    it "builds test class path with base package" do
+      expect(Configuration.test_class_path("models", "Product.java")).to eq "src/test/java/app/models/Product.java"
+    end
+  end
 end
