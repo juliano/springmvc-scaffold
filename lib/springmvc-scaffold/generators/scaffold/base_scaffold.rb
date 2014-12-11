@@ -27,7 +27,7 @@ class BaseScaffold < SpringMvcScaffold::Base
   end
 
   def controller_class_name
-    "#{class_name}Controller"
+    "#{class_name.pluralize}Controller"
   end
 
   def controller_test_class_name

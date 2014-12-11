@@ -21,7 +21,7 @@ describe BaseScaffold do
     end
 
     it "knows controller class name" do
-      expect(subject.controller_class_name).to eq "ClientController"
+      expect(subject.controller_class_name).to eq "ClientsController"
     end
 
     it "knows controller test class name" do

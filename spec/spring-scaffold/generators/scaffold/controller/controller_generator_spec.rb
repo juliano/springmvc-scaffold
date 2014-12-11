@@ -15,4 +15,23 @@ describe ControllerGenerator do
       expect(described_class.new("orderItem", build_attributes).path).to eq "/orderItems"
     end
   end
+
+  context "generating" do
+    before { mock_config_file }
+    after { FileUtils.remove_dir("src") }
+
+    context "from a lowercase name" do
+      before { described_class.new("product", build_attributes).build }
+
+      it "creates controller" do
+        source = File.join(File.dirname(__FILE__), "templates", "ProductsController.java")
+        destination = Configuration.main_class_path("controllers", "ProductsController.java")
+        exists_and_identical?(source, destination)
+      end
+    end
+
+    context "from a uppercase name" do
+      before { described_class.new("Product", build_attributes).build }
+    end
+  end
 end

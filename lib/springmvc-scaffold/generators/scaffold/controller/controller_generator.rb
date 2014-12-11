@@ -1,5 +1,10 @@
 class ControllerGenerator < BaseScaffold
 
+  def build
+    define_source_paths
+    template("controller.erb", Configuration.main_class_path(Configuration.controllers_package, "#{controller_class_name}.java"))
+  end
+
   def template_path
     "src/templates/controllers"
   end
