@@ -25,4 +25,25 @@ describe RepositoryGenerator do
       expect(File.exist?(test_class)).to be true
     end
   end
+
+  context "hibernate" do
+    let(:config) { {"package" => "app", "orm" => "hibernate", "repositories_package" => "repositories", "models_package" => "models"} }
+    before do
+      allow(YAML).to receive(:load_file).with(Configuration::FILENAME).and_return(config)
+      described_class.new("client", build_attributes).build
+    end
+
+    after { FileUtils.remove_dir("src") }
+
+    it "creates repository" do
+      source = File.join(File.dirname(__FILE__), "templates", "Clients.java")
+      destination = Configuration.main_class_path("repositories", "Clients.java")
+      exists_and_identical?(source, destination)
+    end
+
+    it "creates repository test" do
+      test_class = Configuration.test_class_path("repositories", "ClientsTest.java")
+      expect(File.exist?(test_class)).to be true
+    end
+  end
 end
