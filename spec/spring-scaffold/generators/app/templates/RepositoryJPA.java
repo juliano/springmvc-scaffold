@@ -7,12 +7,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-public abstract class Repository<T, I extends Serializable> {
+public abstract class GenericRepository<T, I extends Serializable> {
 	
 	protected final EntityManager entityManager;
 	protected final Class<T> clazz;
 
-	protected Repository(EntityManager entityManager) {
+	protected GenericRepository(EntityManager entityManager) {
 		this.entityManager = entityManager;
 		
 		@SuppressWarnings("unchecked")

@@ -7,12 +7,12 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-public abstract class Repository<T, I extends Serializable> {
+public abstract class GenericRepository<T, I extends Serializable> {
 	
 	protected final Session session;
 	protected final Class<T> clazz;
 
-	protected Repository(Session session) {
+	protected GenericRepository(Session session) {
 		this.session = session;
 		
 		@SuppressWarnings("unchecked")
