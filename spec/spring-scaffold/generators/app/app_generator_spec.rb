@@ -9,16 +9,16 @@ describe AppGenerator do
 
     after { FileUtils.remove_dir("src") }
 
-    it "should create directory with project name" do
+    it "creates directory with project name" do
       expect(File.exist?(project_path)).to be true
     end
 
-    it "should be invalid when project name already exist" do
+    it "is invalid when project name already exist" do
       expect(Kernel).to receive(:exit)
       described_class.new(project_path, [])
     end
 
-    it "should create pom.xml" do
+    it "creates pom.xml" do
       source = File.join(File.dirname(__FILE__), "templates", "pom.xml")
       destination = "#{project_path}/pom.xml"
       exists_and_identical?(source, destination)
@@ -28,7 +28,7 @@ describe AppGenerator do
       expect(File.exist?("#{project_path}/build.gradle")).to be false
     end
 
-    it "should configure springmvc-scaffold.properties" do
+    it "configures springmvc-scaffold.properties" do
       source = File.join(File.dirname(__FILE__), "templates", "springmvc-scaffold.properties")
       destination = "#{project_path}/#{Configuration::FILENAME}"
       exists_and_identical?(source, destination)
@@ -38,35 +38,35 @@ describe AppGenerator do
       let(:main_java) { "#{project_path}/#{Configuration::MAIN_SRC}" }
       let(:app) { "#{main_java}/app" }
 
-      it "should create source folder" do
+      it "creates source folder" do
         expect(File.exist?(main_java)).to be true
       end
 
-      it "should create app folder" do
+      it "creates app folder" do
         expect(File.exist?(app)).to be true
       end
 
-      it "should create controllers folder" do
+      it "creates controllers folder" do
         expect(File.exist?("#{app}/controllers")).to be true
       end
 
-      it "should create models folder" do
+      it "creates models folder" do
         expect(File.exist?("#{app}/models")).to be true
       end
 
-      it "should create generic entity" do
+      it "creates generic entity" do
         source = File.join(File.dirname(__FILE__), "templates", "Entity.java")
         destination = "#{app}/models/Entity.java"
         exists_and_identical?(source, destination)
       end
 
-      it "should create repositories folder" do
+      it "creates repositories folder" do
         expect(File.exist?("#{app}/repositories")).to be true
       end
 
-      it "should create generic repository" do
+      it "creates generic repository" do
         source =  File.join(File.dirname(__FILE__), "templates", "RepositoryJPA.java")
-        destination = "#{app}/repositories/Repository.java"
+        destination = "#{app}/repositories/GenericRepository.java"
         exists_and_identical?(source, destination)
       end
     end
@@ -75,34 +75,34 @@ describe AppGenerator do
       let(:main_resources) { "#{project_path}/#{Configuration::MAIN_RESOURCES}" }
       let(:meta_inf) { "#{main_resources}/META-INF" }
 
-      it "should create resources folder" do
+      it "creates resources folder" do
         expect(File.exist?(main_resources)).to be true
       end
 
-      it "should create hibernate.properties" do
+      it "creates hibernate.properties" do
         source = "#{AppGenerator.source_root}/resources/hibernate.properties"
         destination = "#{main_resources}/hibernate.properties"
         exists_and_identical?(source, destination)
       end
 
-      it "should create log4j" do
+      it "creates log4j" do
         source = "#{AppGenerator.source_root}/resources/log4j.properties"
         destination = "#{main_resources}/log4j.properties"
         exists_and_identical?(source, destination)
       end
 
-      it "should create messages.properties" do
+      it "creates messages.properties" do
         source = "#{AppGenerator.source_root}/resources/messages.properties"
         destination = "#{main_resources}/messages.properties"
         exists_and_identical?(source, destination)
       end
 
       context "jpa orm" do
-        it "should create META-INF" do
+        it "creates META-INF" do
           expect(File.exist?(meta_inf)).to be true
         end
 
-        it "should create persistence.xml" do
+        it "creates persistence.xml" do
           source = "#{AppGenerator.source_root}/orm/persistence.xml"
           destination = "#{meta_inf}/persistence.xml"
           exists_and_identical?(source, destination)
@@ -124,7 +124,7 @@ describe AppGenerator do
 
         after { FileUtils.remove_dir(@project_path) }
 
-        it "should create hibernate.cfg.xml" do
+        it "creates hibernate.cfg.xml" do
           source = "#{AppGenerator.source_root}/orm/hibernate.cfg.xml"
           destination = "#{@main_resources}/hibernate.cfg.xml"
           exists_and_identical?(source, destination)
@@ -144,20 +144,20 @@ describe AppGenerator do
       let(:webapp) { "#{project_path}/#{Configuration::WEB_APP}" }
       let(:web_inf) { "#{project_path}/#{Configuration::WEB_INF}" }
 
-      it "should create webapp folder" do
+      it "creates webapp folder" do
         expect(File.exist?(webapp)).to be true
       end
 
-      it "should create WEB-INF folder" do
+      it "creates WEB-INF folder" do
         expect(File.exist?(web_inf)).to be true
       end
 
-      it "should create application.js" do
+      it "creates application.js" do
         appjs = "#{webapp}/javascripts/application.js"
         expect(File.exist?(appjs)).to be true
       end
 
-      it "should create application.css" do
+      it "creates application.css" do
         source = "#{AppGenerator.source_root}/webapp/stylesheets/application.css"
         destination = "#{webapp}/stylesheets/application.css"
         exists_and_identical?(source, destination)
@@ -169,23 +169,23 @@ describe AppGenerator do
       let(:test_resources) { "#{project_path}/#{Configuration::TEST_RESOURCES}" }
       let(:app) { "#{test_java}/app" }
 
-      it "should create test source folder" do
+      it "creates test source folder" do
         expect(File.exist?(test_java)).to be true
       end
 
-      it "should create test resources folder" do
+      it "creates test resources folder" do
         expect(File.exist?(test_resources)).to be true
       end
 
-      it "should create controllers folder" do
+      it "creates controllers folder" do
         expect(File.exist?("#{app}/controllers")).to be true
       end
 
-      it "should create models folder" do
+      it "creates models folder" do
         expect(File.exist?("#{app}/models")).to be true
       end
 
-      it "should create repositories folder" do
+      it "creates repositories folder" do
         expect(File.exist?("#{app}/repositories")).to be true
       end
     end
@@ -202,11 +202,11 @@ describe AppGenerator do
 
     after { FileUtils.remove_dir("src") }
 
-    it "should create main path" do
+    it "creates main path" do
       expect(File.exist?(main_java)).to be true
     end
 
-    it "should create test path" do
+    it "creates test path" do
       expect(File.exist?(test_java)).to be true
     end
   end
@@ -218,7 +218,7 @@ describe AppGenerator do
 
     after { FileUtils.remove_dir(project_path) }
 
-    it "should create build.gradle" do
+    it "creates build.gradle" do
       source = File.join(File.dirname(__FILE__), "templates", "build.gradle")
       destination = "#{project_path}/build.gradle"
       exists_and_identical?(source, destination)
@@ -230,21 +230,21 @@ describe AppGenerator do
   end
 
   context "valid build tools" do
-    it "maven should be valid" do
+    it "maven is valid" do
       expect(AppGenerator::BUILD_TOOLS.include?("mvn")).to be true
     end
 
-    it "gradle should be valid" do
+    it "gradle is valid" do
       expect(AppGenerator::BUILD_TOOLS.include?("gradle")).to be true
     end
   end
 
   context "valid orm" do
-    it "jpa should be valid" do
+    it "jpa is valid" do
       expect(AppGenerator::ORMS.include?("jpa")).to be true
     end
 
-    it "hibernate should be valid" do
+    it "hibernate is valid" do
       expect(AppGenerator::ORMS.include?("hibernate")).to be true
     end
   end
@@ -252,12 +252,12 @@ describe AppGenerator do
   context "validate options" do
     let(:project_path) { "springmvc-scaffold" }
 
-    it "should be invalid when build tool is not supported" do
+    it "is invalid when build tool is not supported" do
       expect(Kernel).to receive(:exit)
       AppGenerator.new(project_path, ["-b=maven"])
     end
 
-    it "should be invalid when orm is not supported" do
+    it "is invalid when orm is not supported" do
       expect(Kernel).to receive(:exit)
       AppGenerator.new(project_path, ["-o=toplink"])
     end
