@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import app.models.Client;
 
 @Repository
-public class Clients extends GenericRepository<Client, Long> {
+public class Clients extends GenericRepository<Client> {
 
 	@Autowired
 	public Clients(Session session) {
