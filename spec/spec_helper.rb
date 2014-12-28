@@ -22,3 +22,9 @@ def mock_http_request
   expect(http).to receive(:body).and_return('body')
   expect(SpringMvcScaffold::Downloader).to receive(:open_session).with(kind_of(String)).and_return(http)
 end
+
+def mock_http_request_error
+  http = double(Net::HTTP)
+  expect(http).to receive(:get).with(kind_of(String)).and_throw(Net::HTTPError)
+  expect(SpringMvcScaffold::Downloader).to receive(:open_session).with(kind_of(String)).and_return(http)
+end

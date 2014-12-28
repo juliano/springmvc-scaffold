@@ -232,16 +232,27 @@ describe AppGenerator do
   context "jquery download file" do
     let(:project_path) { "springmvc-scaffold" }
 
-    before do
-      mock_http_request
-      described_class.new(project_path).invoke_all
-    end
-
     after { FileUtils.remove_dir(project_path) }
 
-    it "exists jquery.min.js file" do
-      javascripts = File.join(project_path, Configuration::WEB_APP, "javascripts", "jquery.min.js")
-      expect(File.exist?(javascripts)).to be true
+    context "download done" do
+      before do
+        mock_http_request
+        described_class.new(project_path).invoke_all
+      end
+
+      it "exists jquery.min.js file" do
+        javascripts = File.join(project_path, Configuration::WEB_APP, "javascripts", "jquery.min.js")
+        expect(File.exist?(javascripts)).to be true
+      end
+    end
+
+    context "error on download" do
+      before { mock_http_request_error }
+
+      it "shows an error message" do
+        expect(Kernel).to receive(:puts).with("Was not possible to download jQuery.")
+        described_class.new(project_path).invoke_all
+      end
     end
   end
 
