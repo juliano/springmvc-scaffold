@@ -17,6 +17,8 @@ class AppGenerator < SpringMvcScaffold::Base
 
   class_option :orm, aliases: "-o", default: "jpa", desc: "Object-relational mapping (options: #{ORMS.join(', ')})"
 
+  class_option :"skip-jquery", aliases: "-j", type: :boolean, desc: "Skip jQuery download file"
+
   def self.source_root
     File.join(File.dirname(__FILE__), "templates")
   end
@@ -86,8 +88,10 @@ class AppGenerator < SpringMvcScaffold::Base
     javascripts = File.join(Configuration::WEB_APP, "javascripts")
     create_file File.join(javascripts, "application.js")
 
-    jquery = get_jquery
-    add_file(File.join(javascripts, "jquery.min.js"), jquery.body) if jquery
+    unless options[:"skip-jquery"]
+      jquery = get_jquery
+      add_file(File.join(javascripts, "jquery.min.js"), jquery.body) if jquery
+    end
   end
 
   def configure_scaffold_properties

@@ -5,7 +5,7 @@ describe AppGenerator do
   context "build new application" do
     let(:project_path) { "src/springmvc-scaffold" }
 
-    before { described_class.new(project_path, []).invoke_all }
+    before { described_class.new(project_path, ["--skip-jquery"]).invoke_all }
 
     after { FileUtils.remove_dir("src") }
 
@@ -15,7 +15,7 @@ describe AppGenerator do
 
     it "is invalid when project name already exist" do
       expect(Kernel).to receive(:exit)
-      described_class.new(project_path, [])
+      described_class.new(project_path, ["--skip-jquery"])
     end
 
     it "creates pom.xml" do
@@ -119,7 +119,7 @@ describe AppGenerator do
           @main_resources = "#{@project_path}/#{Configuration::MAIN_RESOURCES}"
           @meta_inf = "#{@main_resources}/META-INF"
 
-          described_class.new(@project_path, ["-o=hibernate"]).invoke_all
+          described_class.new(@project_path, ["-o=hibernate", "--skip-jquery"]).invoke_all
         end
 
         after { FileUtils.remove_dir(@project_path) }
@@ -197,7 +197,7 @@ describe AppGenerator do
     let(:test_java) { "#{project_path}/#{Configuration::TEST_SRC}/br/com/juliano" }
 
     before do
-      described_class.new(project_path, ["-p=br.com.juliano"]).invoke_all
+      described_class.new(project_path, ["-p=br.com.juliano", "--skip-jquery"]).invoke_all
     end
 
     after { FileUtils.remove_dir("src") }
@@ -214,7 +214,7 @@ describe AppGenerator do
   context "creating gradle application" do
     let(:project_path) { "springmvc-scaffold" }
 
-    before { described_class.new(project_path, ["-b=gradle"]).invoke_all }
+    before { described_class.new(project_path, ["-b=gradle", "--skip-jquery"]).invoke_all }
 
     after { FileUtils.remove_dir(project_path) }
 
@@ -270,12 +270,12 @@ describe AppGenerator do
 
     it "is invalid when build tool is not supported" do
       expect(Kernel).to receive(:exit)
-      AppGenerator.new(project_path, ["-b=maven"])
+      AppGenerator.new(project_path, ["-b=maven", "--skip-jquery"])
     end
 
     it "is invalid when orm is not supported" do
       expect(Kernel).to receive(:exit)
-      AppGenerator.new(project_path, ["-o=toplink"])
+      AppGenerator.new(project_path, ["-o=toplink", "--skip-jquery"])
     end
   end
 end
