@@ -65,11 +65,6 @@ class AppGenerator < SpringMvcScaffold::Base
     directory("resources", Configuration::MAIN_RESOURCES)
   end
 
-  def create_webapp
-    @base_package = options[:package]
-    directory("webapp", Configuration::WEB_APP)
-  end
-
   def configure_jpa
     if orm == "jpa"
       metainf = File.join(Configuration::MAIN_RESOURCES, 'META-INF')
@@ -82,9 +77,17 @@ class AppGenerator < SpringMvcScaffold::Base
     copy_file("orm/hibernate.cfg.xml", File.join(Configuration::MAIN_RESOURCES, "hibernate.cfg.xml")) if orm == "hibernate"
   end
 
+  def create_webapp
+    @base_package = options[:package]
+    directory("webapp", Configuration::WEB_APP)
+  end
+
   def create_javascripts
     javascripts = File.join(Configuration::WEB_APP, "javascripts")
     create_file File.join(javascripts, "application.js")
+
+    jquery = get_jquery
+    add_file(File.join(javascripts, "jquery.min.js"), jquery.body) if jquery
   end
 
   def configure_scaffold_properties
@@ -126,4 +129,17 @@ class AppGenerator < SpringMvcScaffold::Base
   def build_tool
     options[:build_tool]
   end
+
+  def get_jquery
+    begin
+      SpringMvcScaffold::Downloader.open_session("ajax.googleapis.com").get(jquery_uri);
+    rescue
+      Kernel.puts("Was not possible to download jQuery.")
+    end
+  end
+
+  def jquery_uri
+    "/ajax/libs/jquery/2.1.3/jquery.min.js"
+  end
+
 end

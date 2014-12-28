@@ -229,6 +229,22 @@ describe AppGenerator do
     end
   end
 
+  context "jquery download file" do
+    let(:project_path) { "springmvc-scaffold" }
+
+    before do
+      mock_http_request
+      described_class.new(project_path).invoke_all
+    end
+
+    after { FileUtils.remove_dir(project_path) }
+
+    it "exists jquery.min.js file" do
+      javascripts = File.join(project_path, Configuration::WEB_APP, "javascripts", "jquery.min.js")
+      expect(File.exist?(javascripts)).to be true
+    end
+  end
+
   context "valid build tools" do
     it "maven is valid" do
       expect(AppGenerator::BUILD_TOOLS.include?("mvn")).to be true
