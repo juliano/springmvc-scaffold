@@ -107,10 +107,6 @@ describe AppGenerator do
           destination = "#{meta_inf}/persistence.xml"
           exists_and_identical?(source, destination)
         end
-
-        it "cannot create hibernate.cfg.xml" do
-          expect(File.exist?("#{main_resources}/hibernate.cfg.xml")).to be false
-        end
       end
 
       context "hibernate orm" do
@@ -123,12 +119,6 @@ describe AppGenerator do
         end
 
         after { FileUtils.remove_dir(@project_path) }
-
-        it "creates hibernate.cfg.xml" do
-          source = "#{AppGenerator.source_root}/orm/hibernate.cfg.xml"
-          destination = "#{@main_resources}/hibernate.cfg.xml"
-          exists_and_identical?(source, destination)
-        end
 
         it "cannot create META-INF" do
           expect(File.exist?(@meta_inf)).to be false

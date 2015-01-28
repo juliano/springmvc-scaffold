@@ -75,12 +75,9 @@ class AppGenerator < SpringMvcScaffold::Base
     end
   end
 
-  def configure_hibernate
-    copy_file("orm/hibernate.cfg.xml", File.join(Configuration::MAIN_RESOURCES, "hibernate.cfg.xml")) if orm == "hibernate"
-  end
-
   def create_webapp
     @base_package = options[:package]
+    @models_package = options[:models_package]
     directory("webapp", Configuration::WEB_APP)
   end
 
