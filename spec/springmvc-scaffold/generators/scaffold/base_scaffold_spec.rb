@@ -16,6 +16,10 @@ describe BaseScaffold do
       expect(subject.repository_class_name).to eq "Clients"
     end
 
+    it "knows repository name" do
+      expect(subject.repository_name).to eq "clients"
+    end
+
     it "knows repository test class name" do
       expect(subject.repository_test_class_name).to eq "ClientsTest"
     end
