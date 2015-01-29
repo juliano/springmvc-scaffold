@@ -14,15 +14,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import app.models.Product;
 import app.repositories.Products;
+import app.repositories.Categories;
 
 @Controller
 public class ProductsController {
 
 	private final Products products;
+	private final Categories categories;
 
 	@Autowired
-	public ProductsController(final Products products) {
+	public ProductsController(final Products products, final Categories categories) {
 		this.products = products;
+		this.categories = categories;
 	}
 
 	@RequestMapping(value = "/products", method = GET)

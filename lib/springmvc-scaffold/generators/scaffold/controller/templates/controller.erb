@@ -14,15 +14,28 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import <%= Configuration.full_models_package %>.<%= class_name %>;
 import <%= Configuration.package %>.<%= Configuration.repositories_package %>.<%= repository_class_name %>;
+<%- @attributes.each do |att| -%>
+	<%- if att.is_reference? -%>
+import <%= Configuration.package %>.<%= Configuration.repositories_package %>.<%= att.java_type.pluralize %>;
+	<%- end -%>
+<%- end -%>
 
 @Controller
 public class <%= controller_class_name %> {
 
 	private final <%= repository_class_name %> <%= repository_name %>;
+	<%- @attributes.each do |att| -%>
+		<%- if att.is_reference? -%>
+	private final <%= att.java_type.pluralize %> <%= att.name.pluralize %>;
+		<%- end -%>
+	<%- end -%>
 
 	@Autowired
-	public <%= controller_class_name %>(final <%= repository_class_name %> <%= repository_name %>) {
+	public <%= controller_class_name %>(final <%= repository_class_name %> <%= repository_name %>, <% @attributes.each do |att| -%><%- if att.is_reference? -%>final <%= att.java_type.pluralize %> <%= att.name.pluralize %><%- end -%><% end -%>) {
 		this.<%= repository_name %> = <%= repository_name %>;
+		<%- @attributes.each do |att| -%>
+			<%- if att.type.eql?("references") -%>
+		this.<%= att.name.pluralize %> = <%= att.name.pluralize %>;<%- end -%><%- end %>
 	}
 
 	@RequestMapping(value = "<%= path %>", method = GET)

@@ -28,6 +28,10 @@ class Attribute
     type == "boolean"
   end
 
+  def is_reference?
+    type.eql?("references")
+  end
+
   def declaration
     "#{java_type} #{name}"
   end
