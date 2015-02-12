@@ -44,7 +44,11 @@ public class ProductsController {
 	}
 
 	@RequestMapping(value = "/products", method = POST)
-	public String create(final Product product, final RedirectAttributes attributes) {
+	public String create(@Valid final Product product, final BindingResult result,
+			final RedirectAttributes attributes) {
+		if(result.hasErrors()) {
+			return "products/newProduct";
+		}
 		products.add(product);
 		attributes.addAttribute("id", product.getId());
 		return "redirect:/products/{id}";
