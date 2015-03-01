@@ -3,7 +3,6 @@ package app.controllers;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import javax.validation.Valid;
 
@@ -61,8 +60,12 @@ public class ProductsController {
 		return new ModelAndView("products/edit", "product", products.get(id));
 	}
 
-	@RequestMapping(value = "/products", method = PUT)
-	public String update(final Product product, final RedirectAttributes attributes) {
+	@RequestMapping(value = "/products/update", method = POST)
+	public String update(@Valid final Product product, final BindingResult result,
+			final RedirectAttributes attributes) {
+		if(result.hasErrors()) {
+			return "products/edit";
+		}
 		products.update(product);
 		attributes.addAttribute("id", product.getId());
 		return "redirect:/products/{id}";

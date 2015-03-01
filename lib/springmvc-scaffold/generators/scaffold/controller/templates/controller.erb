@@ -3,7 +3,6 @@ package <%= Configuration.package %>.<%= Configuration.controllers_package %>;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import javax.validation.Valid;
 
@@ -71,8 +70,12 @@ public class <%= controller_class_name %> {
 		return new ModelAndView("<%= base_path %>/edit", "<%= model_parameter_name %>", <%= repository_name %>.get(id));
 	}
 
-	@RequestMapping(value = "<%= path %>", method = PUT)
-	public String update(final <%= class_name %> <%= model_parameter_name %>, final RedirectAttributes attributes) {
+	@RequestMapping(value = "<%= path %>/update", method = POST)
+	public String update(@Valid final <%= class_name %> <%= model_parameter_name %>, final BindingResult result,
+			final RedirectAttributes attributes) {
+		if(result.hasErrors()) {
+			return "products/edit";
+		}
 		<%= repository_name %>.update(<%= model_parameter_name %>);
 		attributes.addAttribute("id", <%= model_parameter_name %>.getId());
 		return "redirect:<%= path %>/{id}";
