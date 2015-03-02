@@ -1,0 +1,12 @@
+<%%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<head>
+	<title><%= class_name %> [edit]</title>
+</head>
+<body>
+	<form:form action="<%= path %>" commandName="<%= model_parameter_name %>">
+		<%%@include file="form.jsp"%>
+	</form:form>
+</body>
+
+<a href="<%= path %>">Back</a>
