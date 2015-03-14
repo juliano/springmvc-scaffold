@@ -1,0 +1,13 @@
+package <%= Configuration.package %>.<%= Configuration.repositories_package %>;
+
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Test;
+
+public class <%= repository_test_class_name %> {
+
+	@Test
+	public void fakeTest() {
+		assertNotNull("test something real");
+ 	}
+}
