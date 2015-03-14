@@ -30,7 +30,7 @@ sourceSets {
     }
 }
 
-sourceSets.main.classesDir = new File('<%= Configuration::WEB_INF %>/classes')
+sourceSets.main.output.classesDir = new File('<%= Configuration::WEB_INF %>/classes')
 
 jettyRun.scanIntervalSeconds=3
 jettyRun.contextPath = '/'

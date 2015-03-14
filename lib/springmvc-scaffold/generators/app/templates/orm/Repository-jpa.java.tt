@@ -1,13 +1,12 @@
 package <%= options[:package] %>.<%= options[:repositories_package] %>;
 
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-public abstract class GenericRepository<T, I extends Serializable> {
+public abstract class GenericRepository<T> {
 	
 	protected final EntityManager entityManager;
 	protected final Class<T> clazz;
@@ -39,7 +38,6 @@ public abstract class GenericRepository<T, I extends Serializable> {
 	
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
-		Query query = entityManager.createQuery("from " + clazz.getName());
-		return query.getResultList();
+		return entityManager.createQuery("from " + clazz.getName()).getResultList();
 	}
 }

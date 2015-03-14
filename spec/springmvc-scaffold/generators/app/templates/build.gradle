@@ -30,7 +30,7 @@ sourceSets {
     }
 }
 
-sourceSets.main.classesDir = new File('src/main/webapp/WEB-INF/classes')
+sourceSets.main.output.classesDir = new File('src/main/webapp/WEB-INF/classes')
 
 jettyRun.scanIntervalSeconds=3
 jettyRun.contextPath = '/'

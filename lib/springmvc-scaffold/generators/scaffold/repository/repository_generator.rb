@@ -11,12 +11,12 @@ class RepositoryGenerator < BaseScaffold
   end
 
   def orm_import
-    return "org.hibernate.Session" if Configuration.hibernate?
+    return "org.hibernate.SessionFactory" if Configuration.hibernate?
     "javax.persistence.EntityManager"
   end
 
   def orm_parameter_name
-    return "session" if Configuration.hibernate?
+    return "sessionFactory" if Configuration.hibernate?
     "entityManager"
   end
 
