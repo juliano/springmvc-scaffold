@@ -9,7 +9,6 @@
 <div class="field">
 	Active:<br />
 	<form:checkbox path="active" />
-	<form:errors path="active" />
 </div>
 
 <div class="field">
@@ -20,8 +19,9 @@
 
 <div class="field">
 	Category:<br />
-	<form:input path="category" />
-	<form:errors path="category" />
+	<form:select path="category.id">
+		<form:options items="${categoryList}" itemValue="id" itemLabel="id"/>
+	<form:select />
 </div>
 
 <div class="actions">

@@ -42,7 +42,9 @@ public class ProductsController {
 
 	@RequestMapping(value = "/products/new", method = GET)
 	public ModelAndView newProduct() {
-		return new ModelAndView("products/newProduct", "product", new Product());
+		ModelAndView model = new ModelAndView("products/newProduct", "product", new Product());
+		model.addObject("categoryList", categories.all());
+		return model;
 	}
 
 	@RequestMapping(value = "/products", method = POST)
@@ -58,7 +60,9 @@ public class ProductsController {
 
 	@RequestMapping(value = "/products/{id}/edit", method = GET)
 	public ModelAndView edit(@PathVariable final Long id) {
-		return new ModelAndView("products/edit", "product", products.get(id));
+		ModelAndView model = new ModelAndView("products/edit", "product", products.get(id));
+		model.addObject("categoryList", categories.all());
+		return model;
 	}
 
 	@RequestMapping(value = "/products/update", method = POST)
