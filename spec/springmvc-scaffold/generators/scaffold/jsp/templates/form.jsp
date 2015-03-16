@@ -21,7 +21,7 @@
 	Category:<br />
 	<form:select path="category.id">
 		<form:options items="${categoryList}" itemValue="id" itemLabel="id"/>
-	<form:select />
+	</form:select>
 </div>
 
 <div class="actions">

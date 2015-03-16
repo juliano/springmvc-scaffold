@@ -33,7 +33,8 @@ public class <%= controller_class_name %> {
 	<%- end -%>
 
 	@Autowired
-	public <%= controller_class_name %>(final <%= repository_class_name %> <%= repository_name %>, <% @attributes.each do |att| -%><%- if att.is_reference? -%>final <%= att.java_type.pluralize %> <%= att.name.pluralize %><%- end -%><% end -%>) {
+	public <%= controller_class_name %>(final <%= repository_class_name %> <%= repository_name %><% @attributes.each do |att| -%>
+		<%- if att.is_reference? -%>, final <%= att.java_type.pluralize %> <%= att.name.pluralize %><%- end -%><% end -%>) {
 		this.<%= repository_name %> = <%= repository_name %>;
 		<%- @attributes.each do |att| -%>
 			<%- if att.is_reference? -%>
