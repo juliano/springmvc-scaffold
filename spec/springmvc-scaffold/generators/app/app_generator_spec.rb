@@ -5,7 +5,7 @@ describe AppGenerator do
   context "build new application" do
     let(:project_path) { "src/springmvc-scaffold" }
 
-    before { described_class.new(project_path, ["--skip-jquery"]).invoke_all }
+    before { described_class.new(project_path).invoke_all }
 
     after { FileUtils.remove_dir("src") }
 
@@ -15,7 +15,7 @@ describe AppGenerator do
 
     it "is invalid when project name already exist" do
       expect(Kernel).to receive(:exit)
-      described_class.new(project_path, ["--skip-jquery"])
+      described_class.new(project_path)
     end
 
     it "creates pom.xml" do
@@ -115,7 +115,7 @@ describe AppGenerator do
           @main_resources = "#{@project_path}/#{Configuration::MAIN_RESOURCES}"
           @meta_inf = "#{@main_resources}/META-INF"
 
-          described_class.new(@project_path, ["-o=hibernate", "--skip-jquery"]).invoke_all
+          described_class.new(@project_path, ["-o=hibernate"]).invoke_all
         end
 
         after { FileUtils.remove_dir(@project_path) }
@@ -187,7 +187,7 @@ describe AppGenerator do
     let(:test_java) { "#{project_path}/#{Configuration::TEST_SRC}/br/com/juliano" }
 
     before do
-      described_class.new(project_path, ["-p=br.com.juliano", "--skip-jquery"]).invoke_all
+      described_class.new(project_path, ["-p=br.com.juliano"]).invoke_all
     end
 
     after { FileUtils.remove_dir("src") }
@@ -204,7 +204,7 @@ describe AppGenerator do
   context "creating gradle application" do
     let(:project_path) { "springmvc-scaffold" }
 
-    before { described_class.new(project_path, ["-b=gradle", "--skip-jquery"]).invoke_all }
+    before { described_class.new(project_path, ["-b=gradle"]).invoke_all }
 
     after { FileUtils.remove_dir(project_path) }
 
@@ -216,33 +216,6 @@ describe AppGenerator do
 
     it "cannot create pom.xml" do
       expect(File.exist?("#{project_path}/pom.xml")).to be false
-    end
-  end
-
-  context "jquery download file" do
-    let(:project_path) { "springmvc-scaffold" }
-
-    after { FileUtils.remove_dir(project_path) }
-
-    context "download done" do
-      before do
-        mock_http_request
-        described_class.new(project_path).invoke_all
-      end
-
-      it "exists jquery.min.js file" do
-        javascripts = File.join(project_path, Configuration::WEB_APP, "javascripts", "jquery.min.js")
-        expect(File.exist?(javascripts)).to be true
-      end
-    end
-
-    context "error on download" do
-      before { mock_http_request_error }
-
-      it "shows an error message" do
-        expect(Kernel).to receive(:puts).with("Was not possible to download jQuery.")
-        described_class.new(project_path).invoke_all
-      end
     end
   end
 
@@ -271,12 +244,12 @@ describe AppGenerator do
 
     it "is invalid when build tool is not supported" do
       expect(Kernel).to receive(:exit)
-      AppGenerator.new(project_path, ["-b=maven", "--skip-jquery"])
+      AppGenerator.new(project_path, ["-b=maven"])
     end
 
     it "is invalid when orm is not supported" do
       expect(Kernel).to receive(:exit)
-      AppGenerator.new(project_path, ["-o=toplink", "--skip-jquery"])
+      AppGenerator.new(project_path, ["-o=toplink"])
     end
   end
 end

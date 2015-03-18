@@ -17,8 +17,6 @@ class AppGenerator < SpringMvcScaffold::Base
 
   class_option :orm, aliases: "-o", default: "jpa", desc: "Object-relational mapping (options: #{ORMS.join(', ')})"
 
-  class_option :"skip-jquery", aliases: "-j", type: :boolean, desc: "Skip jQuery download file"
-
   def self.source_root
     File.join(File.dirname(__FILE__), "templates")
   end
@@ -84,11 +82,6 @@ class AppGenerator < SpringMvcScaffold::Base
   def create_javascripts
     javascripts = File.join(Configuration::WEB_APP, "javascripts")
     create_file File.join(javascripts, "application.js")
-
-    unless options[:"skip-jquery"]
-      jquery = get_jquery
-      add_file(File.join(javascripts, "jquery.min.js"), jquery.body) if jquery
-    end
   end
 
   def configure_scaffold_properties
@@ -129,18 +122,6 @@ class AppGenerator < SpringMvcScaffold::Base
 
   def build_tool
     options[:build_tool]
-  end
-
-  def get_jquery
-    begin
-      SpringMvcScaffold::Downloader.open_session("ajax.googleapis.com").get(jquery_uri);
-    rescue
-      Kernel.puts("Was not possible to download jQuery.")
-    end
-  end
-
-  def jquery_uri
-    "/ajax/libs/jquery/2.1.3/jquery.min.js"
   end
 
 end
