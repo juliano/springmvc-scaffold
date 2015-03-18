@@ -7,5 +7,5 @@ gem 'activesupport', '4.1.8'
 
 group :test, :development do
   gem 'rake', '10.1.0'
-  gem 'rspec', '3.1.0', require: 'spec'
+  gem 'rspec', '3.1.0'
 end
