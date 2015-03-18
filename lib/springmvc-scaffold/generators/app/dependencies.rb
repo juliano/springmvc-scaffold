@@ -10,7 +10,8 @@ class Dependencies
      Dependency.new("org.hibernate", "hibernate-c3p0", hibernate_version),
      Dependency.new("org.hibernate", "hibernate-validator", "5.1.3.Final"),
      Dependency.new("org.slf4j", "slf4j-log4j12", "1.7.7"),
-     Dependency.new("joda-time", "joda-time", "2.5")]
+     Dependency.new("joda-time", "joda-time", "2.5"),
+     Dependency.new("org.sitemesh", "sitemesh", "3.0.0")]
   end
 
   def self.test_scope
