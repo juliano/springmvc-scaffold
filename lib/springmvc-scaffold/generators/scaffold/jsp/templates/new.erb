@@ -1,9 +1,13 @@
 <head>
-	<title><%= class_name %> [edit]</title>
+	<title><%= class_name %> [new]</title>
 </head>
 <body>
+	<h1>New <%= class_name %></h1>
 	<form:form action="<%= path %>" commandName="<%= model_parameter_name %>">
 		<%%@include file="form.jsp"%>
+		<div class="actions">
+			<button type="submit">Create <%= class_name %></button>
+		</div>
 	</form:form>
 </body>
 

@@ -2,9 +2,13 @@
 	<title><%= class_name %> [edit]</title>
 </head>
 <body>
+	<h1>Editing <%= class_name %></h1>
 	<form:form action="<%= path %>/update" commandName="<%= model_parameter_name %>">
 		<form:hidden path="id"/>
 		<%%@include file="form.jsp"%>
+		<div class="actions">
+			<button type="submit">Update <%= class_name %></button>
+		</div>
 	</form:form>
 </body>
 

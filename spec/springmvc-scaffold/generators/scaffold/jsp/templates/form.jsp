@@ -1,5 +1,3 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <div class="field">
 	Name:<br />
 	<form:input path="name" />
@@ -24,6 +22,3 @@
 	</form:select>
 </div>
 
-<div class="actions">
-	<button type="submit">send</button>
-</div>
