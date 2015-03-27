@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import app.models.Product;
 import app.repositories.Products;
@@ -48,14 +47,18 @@ public class ProductsController {
 	}
 
 	@RequestMapping(value = "/products", method = POST)
-	public String create(@Valid final Product product, final BindingResult result,
-			final RedirectAttributes attributes) {
+	public ModelAndView create(@Valid final Product product, final BindingResult result) {
+		ModelAndView model = new ModelAndView();
 		if(result.hasErrors()) {
-			return "products/newProduct";
+			model.setViewName("products/newProduct");
+			model.addObject("categoryList", categories.all());
+			return model;
 		}
+
 		products.add(product);
-		attributes.addAttribute("id", product.getId());
-		return "redirect:/products/{id}";
+		model.setViewName("redirect:/products/{id}");
+		model.addObject("id", product.getId());
+		return model;
 	}
 
 	@RequestMapping(value = "/products/{id}/edit", method = GET)
@@ -66,14 +69,18 @@ public class ProductsController {
 	}
 
 	@RequestMapping(value = "/products/update", method = POST)
-	public String update(@Valid final Product product, final BindingResult result,
-			final RedirectAttributes attributes) {
+	public ModelAndView update(@Valid final Product product, final BindingResult result) {
+		ModelAndView model = new ModelAndView();
 		if(result.hasErrors()) {
-			return "products/edit";
+			model.setViewName("products/edit");
+			model.addObject("categoryList", categories.all());
+			return model;
 		}
+
 		products.update(product);
-		attributes.addAttribute("id", product.getId());
-		return "redirect:/products/{id}";
+		model.setViewName("redirect:/products/{id}");
+		model.addObject("id", product.getId());
+		return model;
 	}
 
 	@RequestMapping(value = "/products/{id}", method = DELETE)
