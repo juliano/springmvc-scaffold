@@ -73,7 +73,6 @@ describe AppGenerator do
 
     context "creating main resources" do
       let(:main_resources) { "#{project_path}/#{Configuration::MAIN_RESOURCES}" }
-      let(:meta_inf) { "#{main_resources}/META-INF" }
 
       it "creates resources folder" do
         expect(File.exist?(main_resources)).to be true
