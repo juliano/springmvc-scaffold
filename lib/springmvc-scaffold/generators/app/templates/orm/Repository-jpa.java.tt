@@ -4,39 +4,46 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional
 public abstract class GenericRepository<T> {
 	
-	protected final EntityManager entityManager;
+	protected EntityManager em;
 	protected final Class<T> clazz;
 
-	protected GenericRepository(EntityManager entityManager) {
-		this.entityManager = entityManager;
-		
+	protected GenericRepository() {
 		@SuppressWarnings("unchecked")
 		Class<T> clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
 		this.clazz = clazz;
 	}
-	
-	public void add(T entity) {
-		entityManager.persist(entity);
+
+	@PersistenceContext
+	public void setEntityManager(EntityManager em) {
+		this.em = em;
 	}
-	
+
+	public void add(T entity) {
+		em.persist(entity);
+	}
+
 	public T update(T entity) {
-		return entityManager.merge(entity);
+		return em.merge(entity);
 	}
 	
 	public void remove(T entity) {
-		entityManager.remove(entity);
+		em.remove(entity);
 	}
 	
 	public T get(Long id) {
-		return entityManager.find(clazz, id);
+		return em.find(clazz, id);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<T> all() {
-		return entityManager.createQuery("from " + clazz.getName()).getResultList();
+		return em.createQuery("from " + clazz.getName()).getResultList();
 	}
 }
