@@ -65,14 +65,6 @@ class AppGenerator < SpringMvcScaffold::Base
     directory("resources", Configuration::MAIN_RESOURCES)
   end
 
-  def configure_jpa
-    if orm == "jpa"
-      metainf = File.join(Configuration::MAIN_RESOURCES, 'META-INF')
-      empty_directory metainf
-      copy_file("orm/persistence.xml", (File.join(metainf, "persistence.xml")))
-    end
-  end
-
   def create_webapp
     @base_package = options[:package]
     @models_package = "#{@base_package}.#{options[:models_package]}"

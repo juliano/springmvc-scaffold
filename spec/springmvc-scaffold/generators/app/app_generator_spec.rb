@@ -96,38 +96,6 @@ describe AppGenerator do
         destination = "#{main_resources}/messages.properties"
         exists_and_identical?(source, destination)
       end
-
-      context "jpa orm" do
-        it "creates META-INF" do
-          expect(File.exist?(meta_inf)).to be true
-        end
-
-        it "creates persistence.xml" do
-          source = "#{AppGenerator.source_root}/orm/persistence.xml"
-          destination = "#{meta_inf}/persistence.xml"
-          exists_and_identical?(source, destination)
-        end
-      end
-
-      context "hibernate orm" do
-        before do
-          @project_path = "src/springmvc-scaffold-hibernate"
-          @main_resources = "#{@project_path}/#{Configuration::MAIN_RESOURCES}"
-          @meta_inf = "#{@main_resources}/META-INF"
-
-          described_class.new(@project_path, ["-o=hibernate"]).invoke_all
-        end
-
-        after { FileUtils.remove_dir(@project_path) }
-
-        it "cannot create META-INF" do
-          expect(File.exist?(@meta_inf)).to be false
-        end
-
-        it "cannot create persistence.xml" do
-          expect(File.exist?("#{@meta_inf}/persistence.xml")).to be false
-        end
-      end
     end
 
     context "creating main webapp" do
