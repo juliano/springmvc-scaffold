@@ -4,7 +4,6 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 public abstract class GenericRepository<T> {
 	
@@ -32,12 +31,12 @@ public abstract class GenericRepository<T> {
 		entityManager.remove(entity);
 	}
 	
-	public T get(I id) {
+	public T get(Long id) {
 		return entityManager.find(clazz, id);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<T> getAll() {
+	public List<T> all() {
 		return entityManager.createQuery("from " + clazz.getName()).getResultList();
 	}
 }
