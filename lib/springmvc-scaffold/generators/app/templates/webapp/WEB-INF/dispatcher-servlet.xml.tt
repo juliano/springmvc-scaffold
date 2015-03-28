@@ -25,13 +25,25 @@
         <property name="jdbcUrl" value="jdbc:hsqldb:file:tmp/devdb"/>
     </bean>
 
-    <% if orm == "hibernate" %><bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <%- if orm == "hibernate" -%>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan" value="<%= @models_package %>" />
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
+    </bean><% else -%>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+        p:dataSource-ref="dataSource" p:packagesToScan="<%= @models_package %>">
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
     </bean>
-    <tx:annotation-driven /><% end %>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+      <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    <%- end %>
+    <tx:annotation-driven />
 </beans>
