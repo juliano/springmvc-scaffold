@@ -114,7 +114,7 @@ public class <%= controller_class_name %> {
 
 	@RequestMapping(value = "<%= path %>/{id}", method = DELETE)
 	public String destroy(@PathVariable final Long id) {
-		<%= repository_name %>.remove(<%= repository_name %>.get(id));
+		<%= repository_name %>.remove(id);
 		return "redirect:<%= path %>";
 	}
 }

@@ -34,8 +34,8 @@ public abstract class GenericRepository<T> {
 		return em.merge(entity);
 	}
 	
-	public void remove(T entity) {
-		em.remove(entity);
+	public void remove(Long id) {
+		em.remove(get(id));
 	}
 	
 	public T get(Long id) {

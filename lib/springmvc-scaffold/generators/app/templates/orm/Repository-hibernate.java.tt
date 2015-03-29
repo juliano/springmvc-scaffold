@@ -35,8 +35,8 @@ public abstract class GenericRepository<T> {
 		return (T) session().merge(entity);
 	}
 	
-	public void remove(T entity) {
-		session().delete(entity);
+	public void remove(Long id) {
+		session().delete(get(id));
 	}
 	
 	@SuppressWarnings("unchecked")

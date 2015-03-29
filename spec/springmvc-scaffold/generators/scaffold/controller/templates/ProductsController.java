@@ -85,7 +85,7 @@ public class ProductsController {
 
 	@RequestMapping(value = "/products/{id}", method = DELETE)
 	public String destroy(@PathVariable final Long id) {
-		products.remove(products.get(id));
+		products.remove(id);
 		return "redirect:/products";
 	}
 }
