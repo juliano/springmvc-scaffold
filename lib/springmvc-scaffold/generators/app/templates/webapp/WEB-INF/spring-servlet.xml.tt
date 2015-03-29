@@ -20,20 +20,14 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="org.hsqldb.jdbcDriver"/>
-        <property name="jdbcUrl" value="jdbc:hsqldb:file:tmp/devdb"/>
-    </bean>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close" />
 
     <%- if orm == "hibernate" -%>
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan" value="<%= @models_package %>" />
-    </bean>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+        p:dataSource-ref="dataSource" p:packagesToScan="app.models" />
 
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean><% else -%>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+        p:sessionFactory-ref="sessionFactory" /><% else -%>
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
         p:dataSource-ref="dataSource" p:packagesToScan="<%= @models_package %>">
         <property name="jpaVendorAdapter">
@@ -41,9 +35,8 @@
         </property>
     </bean>
 
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-      <property name="entityManagerFactory" ref="entityManagerFactory" />
-    </bean>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+        p:entityManagerFactory-ref="entityManagerFactory" />
     <%- end %>
     <tx:annotation-driven />
 </beans>
