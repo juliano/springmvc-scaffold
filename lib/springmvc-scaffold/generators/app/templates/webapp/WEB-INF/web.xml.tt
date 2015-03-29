@@ -23,7 +23,7 @@
 
   <filter-mapping>
     <filter-name>hiddenHttpMethodFilter</filter-name>
-    <servlet-name>dispatcher</servlet-name>
+    <servlet-name>spring</servlet-name>
   </filter-mapping>
 
   <filter>
