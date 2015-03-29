@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import app.models.Product;
 import app.repositories.Products;
@@ -47,7 +48,8 @@ public class ProductsController {
 	}
 
 	@RequestMapping(value = "/products", method = POST)
-	public ModelAndView create(@Valid final Product product, final BindingResult result) {
+	public ModelAndView create(@Valid final Product product, final BindingResult result,
+			final RedirectAttributes attrs) {
 		ModelAndView model = new ModelAndView();
 		if(result.hasErrors()) {
 			model.setViewName("products/newProduct");
@@ -58,6 +60,7 @@ public class ProductsController {
 		products.add(product);
 		model.setViewName("redirect:/products/{id}");
 		model.addObject("id", product.getId());
+		attrs.addFlashAttribute("message", "Product was successfully created.");
 		return model;
 	}
 
@@ -69,7 +72,8 @@ public class ProductsController {
 	}
 
 	@RequestMapping(value = "/products/update", method = POST)
-	public ModelAndView update(@Valid final Product product, final BindingResult result) {
+	public ModelAndView update(@Valid final Product product, final BindingResult result,
+			final RedirectAttributes attrs) {
 		ModelAndView model = new ModelAndView();
 		if(result.hasErrors()) {
 			model.setViewName("products/edit");
@@ -80,12 +84,14 @@ public class ProductsController {
 		products.update(product);
 		model.setViewName("redirect:/products/{id}");
 		model.addObject("id", product.getId());
+		attrs.addFlashAttribute("message", "Product was successfully updated.");
 		return model;
 	}
 
 	@RequestMapping(value = "/products/{id}", method = DELETE)
-	public String destroy(@PathVariable final Long id) {
+	public String destroy(@PathVariable final Long id, final RedirectAttributes attrs) {
 		products.remove(id);
+		attrs.addFlashAttribute("message", "Product was successfully destroyed.");
 		return "redirect:/products";
 	}
 }

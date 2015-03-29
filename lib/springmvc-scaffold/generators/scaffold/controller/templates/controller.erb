@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import <%= Configuration.full_models_package %>.<%= class_name %>;
 import <%= Configuration.package %>.<%= Configuration.repositories_package %>.<%= repository_class_name %>;
@@ -64,7 +65,8 @@ public class <%= controller_class_name %> {
 	}
 
 	@RequestMapping(value = "<%= path %>", method = POST)
-	public ModelAndView create(@Valid final <%= class_name %> <%= model_parameter_name %>, final BindingResult result) {
+	public ModelAndView create(@Valid final <%= class_name %> <%= model_parameter_name %>, final BindingResult result,
+			final RedirectAttributes attrs) {
 		ModelAndView model = new ModelAndView();
 		if(result.hasErrors()) {
 			model.setViewName("<%= base_path %>/new<%= class_name %>");
@@ -79,6 +81,7 @@ public class <%= controller_class_name %> {
 		<%= repository_name %>.add(<%= model_parameter_name %>);
 		model.setViewName("redirect:<%= path %>/{id}");
 		model.addObject("id", <%= model_parameter_name %>.getId());
+		attrs.addFlashAttribute("message", "<%= class_name %> was successfully created.");
 		return model;
 	}
 
@@ -94,7 +97,8 @@ public class <%= controller_class_name %> {
 	}
 
 	@RequestMapping(value = "<%= path %>/update", method = POST)
-	public ModelAndView update(@Valid final <%= class_name %> <%= model_parameter_name %>, final BindingResult result) {
+	public ModelAndView update(@Valid final <%= class_name %> <%= model_parameter_name %>, final BindingResult result,
+			final RedirectAttributes attrs) {
 		ModelAndView model = new ModelAndView();
 		if(result.hasErrors()) {
 			model.setViewName("<%= base_path %>/edit");
@@ -109,12 +113,14 @@ public class <%= controller_class_name %> {
 		<%= repository_name %>.update(<%= model_parameter_name %>);
 		model.setViewName("redirect:<%= path %>/{id}");
 		model.addObject("id", <%= model_parameter_name %>.getId());
+		attrs.addFlashAttribute("message", "<%= class_name %> was successfully updated.");
 		return model;
 	}
 
 	@RequestMapping(value = "<%= path %>/{id}", method = DELETE)
-	public String destroy(@PathVariable final Long id) {
+	public String destroy(@PathVariable final Long id, final RedirectAttributes attrs) {
 		<%= repository_name %>.remove(id);
+		attrs.addFlashAttribute("message", "<%= class_name %> was successfully destroyed.");
 		return "redirect:<%= path %>";
 	}
 }

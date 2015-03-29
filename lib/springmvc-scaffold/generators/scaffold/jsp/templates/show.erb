@@ -2,6 +2,8 @@
 	<title><%= class_name %> [show]</title>
 </head>
 <body>
+  <p id="message">${message}</p>
+
 <%- @attributes.each do |att| -%>
 	<p>
 		<b><%= att.html_label %>:</b>
