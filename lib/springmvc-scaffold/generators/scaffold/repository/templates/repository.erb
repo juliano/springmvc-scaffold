@@ -1,16 +1,18 @@
 package <%= Configuration.package %>.<%= Configuration.repositories_package %>;
 
+<% if Configuration.hibernate? -%>
 import <%= orm_import %>;
 import org.springframework.beans.factory.annotation.Autowired;
+<% end -%>
 import org.springframework.stereotype.Repository;
 
 import <%= Configuration.full_models_package %>.<%= class_name %>;
 
 @Repository
 public class <%= repository_class_name %> extends GenericRepository<<%= class_name %>> {
-
+  <% if Configuration.hibernate? %>
 	@Autowired
 	public <%= repository_class_name %>(<%= orm_class %> <%= orm_parameter_name %>) {
 		super(<%= orm_parameter_name %>);
-	}
+	}<% end %>
 }
