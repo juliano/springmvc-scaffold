@@ -6,6 +6,10 @@ describe ScaffoldGenerator do
   subject { described_class.new(args) }
   let(:attributes) { subject.generated_attributes }
 
+  it "configures banner" do
+    expect(described_class.banner).to eq "springmvc scaffold MODEL [field:type field:type]"
+  end
+
   context "generated attributes" do
     it "generates name attribute" do
       att = attributes.first

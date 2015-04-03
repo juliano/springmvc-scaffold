@@ -4,6 +4,10 @@ class ScaffoldGenerator < SpringMvcScaffold::Base
   argument :model
   argument :attributes, type: :hash, default: {}, banner: "field:type field:type"
 
+  def self.banner
+    "springmvc scaffold #{self.arguments.map(&:usage).join(' ')}"
+  end
+
   def initialize(args)
     super(args)
     @generated_attributes = attributes.map {|field, type| Attribute.new(field, type) }
