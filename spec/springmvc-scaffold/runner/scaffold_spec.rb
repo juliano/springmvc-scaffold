@@ -29,4 +29,8 @@ describe SpringMvcScaffold::Runner::Scaffold do
     end
   end
 
+  it "prints help command" do
+    expect(ScaffoldGenerator).to receive(:start).with(["-h"])
+    subject.run(["--help"])
+  end
 end
