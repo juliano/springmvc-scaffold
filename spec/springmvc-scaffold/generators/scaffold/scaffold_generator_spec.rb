@@ -25,37 +25,33 @@ describe ScaffoldGenerator do
   end
 
   context "generators" do
+    before do
+      allow(YAML).to receive(:load_file).with(Configuration::FILENAME).and_return({})
+    end
+
     it "calls controller generator" do
-      controller_generator = double(ControllerGenerator)
-      allow(ControllerGenerator).to receive(:new).with(model, attributes).and_return(controller_generator)
+      controller_generator = double_generator(ControllerGenerator)
       expect(controller_generator).to receive(:build)
 
       subject.controller_generator
     end
 
     it "calls model generator" do
-      config = {}
-      allow(YAML).to receive(:load_file).with(Configuration::FILENAME).and_return(config)
-      model_generator = double(ModelGenerator)
-      allow(ModelGenerator).to receive(:new).with(model, attributes).and_return(model_generator)
+      model_generator = double_generator(ModelGenerator)
       expect(model_generator).to receive(:build)
 
       subject.model_generator
     end
 
     it "calls jsp generator" do
-      template_generator = double(JspGenerator)
-      allow(JspGenerator).to receive(:new).with(model, attributes).and_return(template_generator)
+      template_generator = double_generator(JspGenerator)
       expect(template_generator).to receive(:build)
 
       subject.template_generator
     end
 
     it "calls repository generator" do
-      config = {}
-      allow(YAML).to receive(:load_file).with(Configuration::FILENAME).and_return(config)
-      repository_generator = double(RepositoryGenerator)
-      allow(RepositoryGenerator).to receive(:new).with(model, attributes).and_return(repository_generator)
+      repository_generator = double_generator(RepositoryGenerator)
       expect(repository_generator).to receive(:build)
 
       subject.repository_generator

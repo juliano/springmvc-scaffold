@@ -15,3 +15,9 @@ def mock_config_file
   file = YAML.load_file(File.join(File.dirname(__FILE__), "springmvc-scaffold/generators/app/templates/springmvc-scaffold.properties"))
   allow(Configuration).to receive(:config).and_return(file)
 end
+
+def double_generator(generator_class)
+  generator = double(generator_class)
+  allow(generator_class).to receive(:new).with(model, attributes).and_return(generator)
+  generator
+end
