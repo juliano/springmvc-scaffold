@@ -219,4 +219,8 @@ describe AppGenerator do
       AppGenerator.new(project_path, ["-o=toplink"])
     end
   end
+
+  it "configures banner" do
+    expect(AppGenerator.banner).to eq "springmvc new PROJECT_PATH [options]"
+  end
 end

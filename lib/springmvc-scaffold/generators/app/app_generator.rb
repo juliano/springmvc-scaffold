@@ -21,6 +21,10 @@ class AppGenerator < SpringMvcScaffold::Base
     File.join(File.dirname(__FILE__), "templates")
   end
 
+  def self.banner
+    "springmvc new #{self.arguments.map(&:usage).join(' ')} [options]"
+  end
+
   def initialize(args, opts=[])
     super([args], opts)
     validate
