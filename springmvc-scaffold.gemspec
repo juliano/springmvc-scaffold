@@ -1,9 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
+require "springmvc-scaffold/version"
 
 Gem::Specification.new do |s|
   s.name        = "springmvc-scaffold"
-  s.version     = "1.0.0"
+  s.version     = SpringMvcScaffold::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Juliano Alves"]
   s.email       = "von.juliano@gmail.com"
