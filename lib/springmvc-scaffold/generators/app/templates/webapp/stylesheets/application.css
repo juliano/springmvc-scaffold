@@ -1,28 +1,26 @@
 body {
-	background-color: #fff;
-	color: #333;
 	font-family: verdana, arial, helvetica, sans-serif;
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 18px;
 }
 
 p, ol, ul, td {
 	font-family: verdana, arial, helvetica, sans-serif;
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 18px;
 }
 
 a {
-	color: #000;
+	color: #4169E1;
 }
 
 a:visited {
-	color: #666;
+	color: #5F9EA0;
 }
 
 a:hover {
 	color: #fff;
-	background-color: #000;
+	background-color: #4169E1;
 }
 
 div.field, div.actions {
@@ -30,10 +28,11 @@ div.field, div.actions {
 }
 
 #message {
-	color: green;
+	color: #00BFFF;
 }
 
 span[id$=errors] {
 	padding: 2px;
+  color: white;
 	background-color: red;
 }
