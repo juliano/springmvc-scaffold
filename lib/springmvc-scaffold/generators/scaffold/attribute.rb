@@ -41,19 +41,19 @@ class Attribute
     java = "boolean" if boolean?
     java = "String" if type.eql?("text")
     java = "Date" if type.eql?("date")
-    java = name.camelize if type.eql?("references")
+    java = name.camelize if is_reference?
     java
   end
 
   def html_input
-    input = "text"
+    input = "input"
     input = "checkbox" if boolean?
     input = "textarea" if type == "text"
     input
   end
 
   def html_label
-    @name.underscore.humanize
+    name.underscore.humanize
   end
 
   private

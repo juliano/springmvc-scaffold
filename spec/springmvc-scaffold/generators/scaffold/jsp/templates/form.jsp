@@ -7,6 +7,7 @@
 <div class="field">
 	Active:<br />
 	<form:checkbox path="active" />
+	<form:errors path="active" />
 </div>
 
 <div class="field">

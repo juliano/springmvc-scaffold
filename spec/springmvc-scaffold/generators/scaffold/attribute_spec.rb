@@ -96,27 +96,27 @@ describe Attribute do
     end
 
     it "knows html input to string" do
-      expect(described_class.new("name", "string").html_input).to eq "text"
+      expect(described_class.new("name", "string").html_input).to eq "input"
     end
 
     it "knows html input to double" do
-      expect(described_class.new("name", "double").html_input).to eq "text"
+      expect(described_class.new("name", "double").html_input).to eq "input"
     end
 
     it "knows html input to float" do
-      expect(described_class.new("name", "float").html_input).to eq "text"
+      expect(described_class.new("name", "float").html_input).to eq "input"
     end
 
     it "knows html input to short" do
-      expect(described_class.new("name", "short").html_input).to eq "text"
+      expect(described_class.new("name", "short").html_input).to eq "input"
     end
 
     it "knows html input to integer" do
-      expect(described_class.new("name", "integer").html_input).to eq "text"
+      expect(described_class.new("name", "integer").html_input).to eq "input"
     end
 
     it "knows html input to long" do
-      expect(described_class.new("name", "long").html_input).to eq "text"
+      expect(described_class.new("name", "long").html_input).to eq "input"
     end
 
     it "knows html input to text" do
@@ -124,7 +124,7 @@ describe Attribute do
     end
 
     it "knows html input to date" do
-      expect(described_class.new("price", "date").html_input).to eq "text"
+      expect(described_class.new("price", "date").html_input).to eq "input"
     end
   end
 

@@ -1,14 +1,12 @@
 <% @attributes.each do |att| -%>
 <div class="field">
 	<%= att.html_label %>:<br />
-	<%- if att.boolean? -%>
-	<form:checkbox path="<%=att.name%>" />
-	<%- elsif att.is_reference? -%>
+	<%- if att.is_reference? -%>
 	<form:select path="<%=att.name%>.id">
 		<form:options items="${<%=att.name%>List}" itemValue="id" itemLabel="id"/>
 	</form:select>
 	<%- else -%>
-	<form:input path="<%=att.name%>" />
+	<form:<%= att.html_input %> path="<%=att.name%>" />
 	<form:errors path="<%=att.name%>" />
   <%- end -%>
 </div>
