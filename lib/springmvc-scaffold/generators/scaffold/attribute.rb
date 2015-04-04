@@ -9,13 +9,6 @@ class Attribute
     validate
   end
 
-  def validate
-    unless VALID_TYPES.include?(@type)
-      puts "Attribute #{@type} is not supported. The supported attributes types are: #{VALID_TYPES.join(", ")}"
-      Kernel::exit
-    end
-  end
-
   def getter_name
     getter_prefix + name.camelize
   end
@@ -52,11 +45,22 @@ class Attribute
     input
   end
 
+  def import
+    Imports.new(type).package
+  end
+
   def html_label
     name.underscore.humanize
   end
 
   private
+  def validate
+    unless VALID_TYPES.include?(@type)
+      puts "Attribute #{@type} is not supported. The supported attributes types are: #{VALID_TYPES.join(", ")}"
+      Kernel::exit
+    end
+  end
+
   def getter_prefix
     return "is" if boolean?
     "get"

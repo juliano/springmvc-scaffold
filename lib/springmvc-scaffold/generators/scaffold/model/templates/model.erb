@@ -1,5 +1,7 @@
 package <%= Configuration.full_models_package %>;
-
+<% imports.each do |import| %>
+import <%= import %>;
+<% end %>
 @javax.persistence.Entity
 public class <%= class_name %> extends Entity {
 

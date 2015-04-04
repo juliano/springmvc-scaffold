@@ -62,4 +62,9 @@ describe BaseScaffold do
       expect(described_class.new("OrderItem").base_path).to eq "orderItems"
     end
   end
+
+  it "do not allow duplicate import" do
+    base = described_class.new("product", [Attribute.new("created", "date"), Attribute.new("validity", "date")])
+    expect(base.imports.one?).to be true
+  end
 end

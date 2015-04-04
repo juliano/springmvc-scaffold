@@ -42,6 +42,10 @@ class BaseScaffold < SpringMvcScaffold::Base
     model_parameter_name.pluralize
   end
 
+  def imports
+    @attributes.map(&:import).uniq.reject(&:empty?).flatten
+  end
+
   protected
   def define_source_paths
     source_paths << File.expand_path(template_path) if File.exist?(template_path)
