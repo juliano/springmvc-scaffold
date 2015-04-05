@@ -28,4 +28,4 @@ open http://localhost:8080/products
 
 ## Author
 
-Spring MVC Scaffold was created and is maintained by "Juliano Alves":http://twitter.com/vonjuliano.
+Spring MVC Scaffold was created and is maintained by [Juliano Alves](http://twitter.com/vonjuliano).
