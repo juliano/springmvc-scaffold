@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.email       = "von.juliano@gmail.com"
   s.homepage    = "http://github.com/juliano/springmvc-scaffold"
   s.summary     = "Spring MVC Scaffold."
-  s.description = "Spring MVC scaffold extension to make it easier configuring new projects and plugins."
-  s.post_install_message = "Thank you for installing springmvc-scaffold. Please read http://github.com/juliano/springmvc-scaffold/blob/master/README.textile for more information."
+  s.description = "Tool to make it easier configuring new Spring MVC projects."
+  s.post_install_message = "Thank you for installing springmvc-scaffold. Please read http://github.com/juliano/springmvc-scaffold/blob/master/README.markdown for more information."
   
   s.add_dependency('thor', '0.19.1')
   s.add_dependency('activesupport', "4.1.8")

@@ -1,6 +1,6 @@
 # Spring MVC Scaffold [![Build Status](https://travis-ci.org/juliano/springmvc-scaffold.svg?branch=master)](https://travis-ci.org/juliano/springmvc-scaffold)
 
-Extension to make it easier configuring new Spring MVC projects.
+Tool to make it easier configuring new Spring MVC projects.
 
 # Installation
 
