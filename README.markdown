@@ -15,7 +15,7 @@ At the command line client:
 	springmvc scaffold product name:string value:double
 	mvn jetty:run
 	
-open http://localhost:8080/products
+Open http://localhost:8080/products
 
 ## Note on Patches/Pull Requests
  
@@ -29,3 +29,4 @@ open http://localhost:8080/products
 ## Author
 
 Spring MVC Scaffold was created and is maintained by [Juliano Alves](http://twitter.com/vonjuliano).
+

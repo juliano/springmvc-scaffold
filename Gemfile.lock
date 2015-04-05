@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    springmvc-scaffold (1.0.0)
+    springmvc-scaffold (1.0.1)
       activesupport (= 4.1.8)
       rake (= 10.1.0)
       thor (= 0.19.1)
