@@ -31,7 +31,7 @@ Open http://localhost:8080/products
 The supported attributes type are: **boolean, double, float, short, integer, long, string, text, date** and **references**.
 
 # Packages
-The root default folder is **app**. To change that you have the fallow command
+The root default folder is **app**. To change that you have the following command
 
     springmvc new myapp -p=br.com.simpledev
 
