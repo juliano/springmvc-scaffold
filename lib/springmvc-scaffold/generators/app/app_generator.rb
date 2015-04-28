@@ -1,6 +1,6 @@
 class AppGenerator < SpringMvcScaffold::Base
 
-  BUILD_TOOLS = %w( mvn gradle )
+  BUILD_TOOLS = %w( mvn gradle sbt )
   ORMS = %w( jpa hibernate)
 
   argument :project_path
@@ -42,6 +42,13 @@ class AppGenerator < SpringMvcScaffold::Base
 
   def configure_gradle
     template("build.gradle.erb", "build.gradle") if build_tool == "gradle"
+  end
+
+  def configure_sbt
+    if build_tool == "sbt"
+      template("build.sbt.erb", "build.sbt")
+      directory("project", "project")
+    end
   end
 
   def create_main_java

@@ -186,6 +186,20 @@ describe AppGenerator do
     end
   end
 
+  context "creating sbt application" do
+    let(:project_path) { "springmvc-scaffold" }
+
+    before { described_class.new(project_path, ["-b=sbt"]).invoke_all }
+
+    after { FileUtils.remove_dir(project_path) }
+
+    it "creates build.sbt" do
+      source = File.join(File.dirname(__FILE__), "templates", "build.sbt")
+      destination = "#{project_path}/build.sbt"
+      exists_and_identical?(source, destination)
+    end
+  end
+
   context "valid build tools" do
     it "maven is valid" do
       expect(AppGenerator::BUILD_TOOLS.include?("mvn")).to be true
