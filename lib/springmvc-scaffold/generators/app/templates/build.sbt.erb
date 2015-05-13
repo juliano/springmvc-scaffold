@@ -15,7 +15,7 @@ libraryDependencies ++= Seq(
 <% end -%>
 
   // Test dependencies
-<% Dependencies.test_scope.each do |dependency| -%>
-  "<%= dependency.group %>" % "<%= dependency.name %>" % "<%= dependency.version %>" % "test"<%= "," unless dependency.eql? Dependencies.test_scope.last %>
+<% Dependencies.test_scope.each_with_index do |dependency, index| -%>
+  "<%= dependency.group %>" % "<%= dependency.name %>" % "<%= dependency.version %>" % "test"<%= "," unless index == Dependencies.test_scope.size - 1 %>
 <% end -%>
 )

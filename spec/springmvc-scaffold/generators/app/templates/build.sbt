@@ -22,5 +22,5 @@ libraryDependencies ++= Seq(
 
   // Test dependencies
   "junit" % "junit" % "4.11" % "test",
-  "org.mockito" % "mockito-all" % "1.10.8" % "test",
+  "org.mockito" % "mockito-all" % "1.10.8" % "test"
 )
