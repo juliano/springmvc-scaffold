@@ -6,9 +6,7 @@ jetty()
 
 libraryDependencies ++= Seq(
 <% Dependencies.compile_scope.each do |dependency| -%>
-  "<%= dependency.group %>" % "<%= dependency.name %>" % "<%= dependency.version %>",<% if dependency.has_exclusions? %>, excludeAll(<% dependency.exclusions.each do |exclusion| %>
-  ExclusionRule(organization = "<%= exclusion.group %>", name = "<%= exclusion.name %>"<% end %>
-  )<% end %>
+  "<%= dependency.group %>" % "<%= dependency.name %>" % "<%= dependency.version %>",
 <%- end -%>
 
   // Provided dependencies

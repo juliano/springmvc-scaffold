@@ -1,15 +1,11 @@
 class Dependency
 
-  attr_accessor :group, :name, :version, :exclusions
+  attr_accessor :group, :name, :version
 
-  def initialize(group, name, version=nil, exclusions=[])
+  def initialize(group, name, version=nil)
     @group = group
     @name = name
     @version = version
-    @exclusions = exclusions
   end
 
-  def has_exclusions?
-    !@exclusions.empty?
-  end
 end
