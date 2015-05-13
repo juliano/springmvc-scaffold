@@ -45,13 +45,19 @@ The default build tool is maven, to change your build tool, just create your app
     # for gradle
     springmvc new myapp -b=gradle
 
-When using gradle, use
+    # for sbt
+    springmvc new myapp -b=sbt
+
+When using gradle, to run your application use:
 
     gradle jettyRun
     # or
     gradle jR
 
-to run the application.
+When using sbt use:
+
+    sbt
+    container:start
 
 #ORM
 
