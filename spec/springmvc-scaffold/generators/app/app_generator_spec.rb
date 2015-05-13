@@ -28,6 +28,10 @@ describe AppGenerator do
       expect(File.exist?("#{project_path}/build.gradle")).to be false
     end
 
+    it "cannot create build.sbt" do
+      expect(File.exist?("#{project_path}/build.sbt")).to be false
+    end
+
     it "configures springmvc-scaffold.properties" do
       source = File.join(File.dirname(__FILE__), "templates", "springmvc-scaffold.properties")
       destination = "#{project_path}/#{Configuration::FILENAME}"
@@ -184,6 +188,10 @@ describe AppGenerator do
     it "cannot create pom.xml" do
       expect(File.exist?("#{project_path}/pom.xml")).to be false
     end
+
+    it "cannot create build.sbt" do
+      expect(File.exist?("#{project_path}/build.sbt")).to be false
+    end
   end
 
   context "creating sbt application" do
@@ -198,6 +206,14 @@ describe AppGenerator do
       destination = "#{project_path}/build.sbt"
       exists_and_identical?(source, destination)
     end
+
+    it "cannot create pom.xml" do
+      expect(File.exist?("#{project_path}/pom.xml")).to be false
+    end
+
+    it "cannot create build.gradle" do
+      expect(File.exist?("#{project_path}/build.gradle")).to be false
+    end
   end
 
   context "valid build tools" do
@@ -207,6 +223,10 @@ describe AppGenerator do
 
     it "gradle is valid" do
       expect(AppGenerator::BUILD_TOOLS.include?("gradle")).to be true
+    end
+
+    it "sbt is valid" do
+      expect(AppGenerator::BUILD_TOOLS.include?("sbt")).to be true
     end
   end
 
